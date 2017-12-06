@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="InputFileViewController" customModule="AndersenFileReader" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="752" height="479"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tabView identifier="GeneralTab" initialItem="FgO-zt-qxQ" translatesAutoresizingMaskIntoConstraints="NO" id="zNs-i1-VGv">
+                    <rect key="frame" x="-7" y="-10" width="766" height="495"/>
+                    <font key="font" metaFont="system"/>
+                    <tabViewItems>
+                        <tabViewItem label="General" identifier="" id="FgO-zt-qxQ">
+                            <view key="view" id="aEA-me-l9s">
+                                <rect key="frame" x="10" y="33" width="746" height="449"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="Terminals" identifier="" id="TZB-ak-Jjs">
+                            <view key="view" id="7mr-SZ-eFf">
+                                <rect key="frame" x="10" y="33" width="746" height="449"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="Layers" identifier="" id="utc-uC-BAR">
+                            <view key="view" id="Q3r-MR-vAX">
+                                <rect key="frame" x="10" y="33" width="474" height="242"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                        <tabViewItem label="Segments" identifier="" id="IX5-it-SRU">
+                            <view key="view" id="q57-cM-rmF">
+                                <rect key="frame" x="10" y="33" width="474" height="242"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </tabViewItem>
+                    </tabViewItems>
+                </tabView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="zNs-i1-VGv" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="3Ee-KF-OIe"/>
+                <constraint firstAttribute="bottom" secondItem="zNs-i1-VGv" secondAttribute="bottom" id="H7x-pj-Bgg"/>
+                <constraint firstItem="zNs-i1-VGv" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="IIl-Y2-4a2"/>
+                <constraint firstAttribute="trailing" secondItem="zNs-i1-VGv" secondAttribute="trailing" id="R6A-cF-Q6N"/>
+            </constraints>
+            <point key="canvasLocation" x="155" y="145.5"/>
+        </customView>
+    </objects>
+</document>

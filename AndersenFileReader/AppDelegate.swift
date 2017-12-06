@@ -16,6 +16,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        
+        let newInputFileVC = InputFileViewController(nibName: nil, bundle: nil)
+        
+        if let winView = window.contentView
+        {
+            winView.addSubview(newInputFileVC.view)
+        }
+        
+        DLog("Finished successfully!")
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

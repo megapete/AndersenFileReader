@@ -10,6 +10,17 @@
 		D3AD7C1C1FD833A600E19465 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD7C1B1FD833A600E19465 /* AppDelegate.swift */; };
 		D3AD7C1E1FD833A600E19465 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3AD7C1D1FD833A600E19465 /* Assets.xcassets */; };
 		D3AD7C211FD833A600E19465 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AD7C1F1FD833A600E19465 /* MainMenu.xib */; };
+		D3AD7C2D1FD8505400E19465 /* InputFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD7C2B1FD8505400E19465 /* InputFileViewController.swift */; };
+		D3AD7C2E1FD8505400E19465 /* InputFileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AD7C2C1FD8505400E19465 /* InputFileViewController.xib */; };
+		D3AD7C301FD850DE00E19465 /* PCH_Defs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD7C2F1FD850DE00E19465 /* PCH_Defs.swift */; };
+		D3AD7C331FD85EF500E19465 /* GeneralDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD7C311FD85EF500E19465 /* GeneralDataViewController.swift */; };
+		D3AD7C341FD85EF500E19465 /* GeneralDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AD7C321FD85EF500E19465 /* GeneralDataViewController.xib */; };
+		D3AD7C371FD8669700E19465 /* TerminalDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD7C351FD8669700E19465 /* TerminalDataViewController.swift */; };
+		D3AD7C381FD8669700E19465 /* TerminalDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AD7C361FD8669700E19465 /* TerminalDataViewController.xib */; };
+		D3AD7C3B1FD866D600E19465 /* LayerDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD7C391FD866D600E19465 /* LayerDataViewController.swift */; };
+		D3AD7C3C1FD866D600E19465 /* LayerDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AD7C3A1FD866D600E19465 /* LayerDataViewController.xib */; };
+		D3AD7C3F1FD866F900E19465 /* SegmentDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD7C3D1FD866F900E19465 /* SegmentDataController.swift */; };
+		D3AD7C401FD866F900E19465 /* SegmentDataController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AD7C3E1FD866F900E19465 /* SegmentDataController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +30,17 @@
 		D3AD7C201FD833A600E19465 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		D3AD7C221FD833A600E19465 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3AD7C231FD833A600E19465 /* AndersenFileReader.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AndersenFileReader.entitlements; sourceTree = "<group>"; };
+		D3AD7C2B1FD8505400E19465 /* InputFileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFileViewController.swift; sourceTree = "<group>"; };
+		D3AD7C2C1FD8505400E19465 /* InputFileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputFileViewController.xib; sourceTree = "<group>"; };
+		D3AD7C2F1FD850DE00E19465 /* PCH_Defs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PCH_Defs.swift; path = ../../../../Dropbox/MyProjects/PCH_Defs.swift; sourceTree = "<group>"; };
+		D3AD7C311FD85EF500E19465 /* GeneralDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralDataViewController.swift; sourceTree = "<group>"; };
+		D3AD7C321FD85EF500E19465 /* GeneralDataViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneralDataViewController.xib; sourceTree = "<group>"; };
+		D3AD7C351FD8669700E19465 /* TerminalDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalDataViewController.swift; sourceTree = "<group>"; };
+		D3AD7C361FD8669700E19465 /* TerminalDataViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TerminalDataViewController.xib; sourceTree = "<group>"; };
+		D3AD7C391FD866D600E19465 /* LayerDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerDataViewController.swift; sourceTree = "<group>"; };
+		D3AD7C3A1FD866D600E19465 /* LayerDataViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LayerDataViewController.xib; sourceTree = "<group>"; };
+		D3AD7C3D1FD866F900E19465 /* SegmentDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentDataController.swift; sourceTree = "<group>"; };
+		D3AD7C3E1FD866F900E19465 /* SegmentDataController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SegmentDataController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +74,17 @@
 			isa = PBXGroup;
 			children = (
 				D3AD7C1B1FD833A600E19465 /* AppDelegate.swift */,
+				D3AD7C2F1FD850DE00E19465 /* PCH_Defs.swift */,
+				D3AD7C2B1FD8505400E19465 /* InputFileViewController.swift */,
+				D3AD7C2C1FD8505400E19465 /* InputFileViewController.xib */,
+				D3AD7C311FD85EF500E19465 /* GeneralDataViewController.swift */,
+				D3AD7C321FD85EF500E19465 /* GeneralDataViewController.xib */,
+				D3AD7C351FD8669700E19465 /* TerminalDataViewController.swift */,
+				D3AD7C361FD8669700E19465 /* TerminalDataViewController.xib */,
+				D3AD7C391FD866D600E19465 /* LayerDataViewController.swift */,
+				D3AD7C3A1FD866D600E19465 /* LayerDataViewController.xib */,
+				D3AD7C3D1FD866F900E19465 /* SegmentDataController.swift */,
+				D3AD7C3E1FD866F900E19465 /* SegmentDataController.xib */,
 				D3AD7C1D1FD833A600E19465 /* Assets.xcassets */,
 				D3AD7C1F1FD833A600E19465 /* MainMenu.xib */,
 				D3AD7C221FD833A600E19465 /* Info.plist */,
@@ -120,7 +153,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3AD7C1E1FD833A600E19465 /* Assets.xcassets in Resources */,
+				D3AD7C381FD8669700E19465 /* TerminalDataViewController.xib in Resources */,
+				D3AD7C3C1FD866D600E19465 /* LayerDataViewController.xib in Resources */,
+				D3AD7C341FD85EF500E19465 /* GeneralDataViewController.xib in Resources */,
+				D3AD7C401FD866F900E19465 /* SegmentDataController.xib in Resources */,
 				D3AD7C211FD833A600E19465 /* MainMenu.xib in Resources */,
+				D3AD7C2E1FD8505400E19465 /* InputFileViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,7 +169,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3AD7C3B1FD866D600E19465 /* LayerDataViewController.swift in Sources */,
+				D3AD7C371FD8669700E19465 /* TerminalDataViewController.swift in Sources */,
 				D3AD7C1C1FD833A600E19465 /* AppDelegate.swift in Sources */,
+				D3AD7C331FD85EF500E19465 /* GeneralDataViewController.swift in Sources */,
+				D3AD7C301FD850DE00E19465 /* PCH_Defs.swift in Sources */,
+				D3AD7C3F1FD866F900E19465 /* SegmentDataController.swift in Sources */,
+				D3AD7C2D1FD8505400E19465 /* InputFileViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
