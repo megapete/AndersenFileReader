@@ -23,6 +23,17 @@ class InputFileViewController: NSViewController {
     var layerDataController:LayerDataViewController? = nil
     var segmentDataController:SegmentDataController? = nil
     
+    // Initializer to stick the new input file view right into a window
+    convenience init(intoWindow:NSWindow)
+    {
+        self.init(nibName: nil, bundle: nil)
+        
+        if let winView = intoWindow.contentView
+        {
+            winView.addSubview(self.view)
+        }
+    }
+    
     override func viewWillAppear()
     {
         // make the view take up the entire bounds of its parent
