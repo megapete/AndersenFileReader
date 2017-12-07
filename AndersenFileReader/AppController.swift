@@ -53,7 +53,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             
             guard let generalVC = inputVC.generalDataController else
             {
-                DLog("Could not acces General Data View")
+                DLog("Could not access General Data View")
                 return
             }
             
@@ -141,8 +141,14 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             generalVC.scaleField.stringValue = "\(txfo.scale)"
             generalVC.numFluxLinesField.stringValue = "\(txfo.numFluxLines)"
             
+            // Now terminals
+            guard let terminalVC = inputVC.terminalDataController else
+            {
+                DLog("Could not access Terminals Data View")
+                return
+            }
             
-            // self.inputTransformer = txfo
+            terminalVC.addTerminalLines(count: 1)
             
         }
         

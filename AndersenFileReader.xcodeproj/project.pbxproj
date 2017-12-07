@@ -23,6 +23,7 @@
 		D3AD7C401FD866F900E19465 /* SegmentDataController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AD7C3E1FD866F900E19465 /* SegmentDataController.xib */; };
 		D3CE93C41FD88B440019E61F /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CE93C31FD88B440019E61F /* AppController.swift */; };
 		D3CE93C71FD898B40019E61F /* libPCH_FLD12_Library.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3CE93C61FD898B40019E61F /* libPCH_FLD12_Library.a */; };
+		D3CE93CC1FD8C14A0019E61F /* TerminalDataLine.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3CE93CB1FD8C14A0019E61F /* TerminalDataLine.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		D3CE93C31FD88B440019E61F /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		D3CE93C61FD898B40019E61F /* libPCH_FLD12_Library.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPCH_FLD12_Library.a; path = ../PCH_FLD12_Library_Release/Products/usr/local/lib/libPCH_FLD12_Library.a; sourceTree = "<group>"; };
 		D3CE93C81FD899B10019E61F /* AndersenFileReader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AndersenFileReader-Bridging-Header.h"; sourceTree = "<group>"; };
+		D3CE93CB1FD8C14A0019E61F /* TerminalDataLine.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TerminalDataLine.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				D3AD7C321FD85EF500E19465 /* GeneralDataViewController.xib */,
 				D3AD7C351FD8669700E19465 /* TerminalDataViewController.swift */,
 				D3AD7C361FD8669700E19465 /* TerminalDataViewController.xib */,
+				D3CE93CB1FD8C14A0019E61F /* TerminalDataLine.xib */,
 				D3AD7C391FD866D600E19465 /* LayerDataViewController.swift */,
 				D3AD7C3A1FD866D600E19465 /* LayerDataViewController.xib */,
 				D3AD7C3D1FD866F900E19465 /* SegmentDataController.swift */,
@@ -173,6 +176,7 @@
 				D3AD7C1E1FD833A600E19465 /* Assets.xcassets in Resources */,
 				D3AD7C381FD8669700E19465 /* TerminalDataViewController.xib in Resources */,
 				D3AD7C3C1FD866D600E19465 /* LayerDataViewController.xib in Resources */,
+				D3CE93CC1FD8C14A0019E61F /* TerminalDataLine.xib in Resources */,
 				D3AD7C341FD85EF500E19465 /* GeneralDataViewController.xib in Resources */,
 				D3AD7C401FD866F900E19465 /* SegmentDataController.xib in Resources */,
 				D3AD7C211FD833A600E19465 /* MainMenu.xib in Resources */,
