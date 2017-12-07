@@ -1,21 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TerminalDataViewController" customModule="AndersenFileReader" customModuleProvider="target">
             <connections>
+                <outlet property="theView" destination="mGt-gL-lms" id="Ugf-8C-QLa"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <customView id="Hz6-mo-xeY" customClass="NSScrollView">
-            <rect key="frame" x="0.0" y="0.0" width="722" height="463"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <point key="canvasLocation" x="405" y="153.5"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="736" height="489"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MGl-aA-73H">
+                    <rect key="frame" x="0.0" y="0.0" width="736" height="489"/>
+                    <clipView key="contentView" id="O6r-K4-hT6">
+                        <rect key="frame" x="1" y="1" width="719" height="472"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LvU-cs-p8K">
+                                <rect key="frame" x="0.0" y="0.0" width="704" height="457"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mGt-gL-lms">
+                                        <rect key="frame" x="0.0" y="0.0" width="704" height="457"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </customView>
+                                </subviews>
+                            </view>
+                        </subviews>
+                    </clipView>
+                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="P36-3a-Dhe">
+                        <rect key="frame" x="1" y="473" width="719" height="15"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Jaf-Gk-q6q">
+                        <rect key="frame" x="720" y="1" width="15" height="472"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="MGl-aA-73H" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="IkJ-Z8-X1f"/>
+                <constraint firstAttribute="trailing" secondItem="MGl-aA-73H" secondAttribute="trailing" id="Wmm-2W-s04"/>
+                <constraint firstItem="MGl-aA-73H" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="dyq-gp-dHr"/>
+                <constraint firstAttribute="bottom" secondItem="MGl-aA-73H" secondAttribute="bottom" id="qHQ-j9-QAf"/>
+            </constraints>
+            <point key="canvasLocation" x="412" y="166.5"/>
         </customView>
     </objects>
 </document>
