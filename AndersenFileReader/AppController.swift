@@ -148,7 +148,8 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 return
             }
             
-            terminalVC.addTerminalLines(count: 6)
+            terminalVC.addTerminalLines(count: Int(txfo.numTerminals))
+            
             
         }
         
