@@ -11,7 +11,7 @@ import Cocoa
 class TerminalDataViewController: NSViewController {
 
     @IBOutlet var theView: NSView!
-    var termDataLines:[TerminalDataLineController]?
+    var termDataLines:[TerminalDataLineController] = []
     
     func addTerminalLines(count:Int)
     {
@@ -20,7 +20,6 @@ class TerminalDataViewController: NSViewController {
         var totalHeightRequired:CGFloat = 0.0
         
         var newController = TerminalDataLineController(nibName: nil, bundle: nil)
-        termDataLines = [newController]
         
         // This logic comes from my ImpulseModeler program (I don't actually understand it)
         
@@ -43,6 +42,7 @@ class TerminalDataViewController: NSViewController {
         
         for _ in 0..<count
         {
+            termDataLines.append(newController)
             theView.addSubview(newController.view)
             
             let oldViewBottom = newController.view.frame.origin.y + yLineOffset
