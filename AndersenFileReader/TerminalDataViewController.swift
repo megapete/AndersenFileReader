@@ -41,7 +41,7 @@ class TerminalDataViewController: NSViewController {
         let yLineOffset = newController.view.frame.height
         newController.view.frame.origin.y = /* theView.frame.origin.y + */ theView.frame.height - yLineOffset
         
-        DLog("scrollView.frame: \(scrollView.frame); theView.frame: \(theView.frame); line.frame: \(newController.view.frame)")
+        // DLog("scrollView.frame: \(scrollView.frame); theView.frame: \(theView.frame); line.frame: \(newController.view.frame)")
         
         for _ in 0..<count
         {

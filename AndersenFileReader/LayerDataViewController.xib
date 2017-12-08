@@ -1,31 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="LayerDataViewController" customModule="AndersenFileReader" customModuleProvider="target">
             <connections>
+                <outlet property="theView" destination="Nx8-9D-BBo" id="NeD-Yu-H63"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="826" height="438"/>
+            <rect key="frame" x="0.0" y="0.0" width="730" height="438"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BPl-9a-uQi">
-                    <rect key="frame" x="378" y="200" width="223" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="This is from the layer data controller" id="7XH-TL-f25">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v26-rF-U0s">
+                    <rect key="frame" x="0.0" y="0.0" width="730" height="438"/>
+                    <clipView key="contentView" id="jQo-0f-FXB">
+                        <rect key="frame" x="1" y="1" width="713" height="421"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nx8-9D-BBo">
+                                <rect key="frame" x="0.0" y="0.0" width="698" height="406"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
+                    </clipView>
+                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="MgY-VJ-RBX">
+                        <rect key="frame" x="1" y="422" width="713" height="15"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="Gdk-2l-vJQ">
+                        <rect key="frame" x="714" y="1" width="15" height="421"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
             </subviews>
+            <constraints>
+                <constraint firstItem="v26-rF-U0s" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="5Nx-3N-fSD"/>
+                <constraint firstAttribute="trailing" secondItem="v26-rF-U0s" secondAttribute="trailing" id="cdX-Kg-qwh"/>
+                <constraint firstItem="v26-rF-U0s" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="pDk-jF-yJI"/>
+                <constraint firstAttribute="bottom" secondItem="v26-rF-U0s" secondAttribute="bottom" id="xMF-wd-tl2"/>
+            </constraints>
             <point key="canvasLocation" x="305" y="251"/>
         </customView>
     </objects>

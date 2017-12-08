@@ -183,6 +183,82 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                     DLog("Unimplemented connection code")
                 }
             }
+            
+            // Layers
+            guard let layerVC = inputVC.layerDataController else
+            {
+                DLog("Could not access Layers Data View")
+                return
+            }
+            
+            guard txfo.numLayers > 0 else
+            {
+                DLog("Illegal layer count!")
+                return
+            }
+            
+            layerVC.addLayerLines(count: Int(txfo.numLayers))
+            
+            guard let layerArray = txfo.layers as? [PCH_FLD12_Layer] else
+            {
+                DLog("Problem with layer array")
+                return
+            }
+            
+            for i in 0..<layerArray.count
+            {
+                let line = layerVC.layerDataLines[i]
+                let layer = layerArray[i]
+                
+                line.layerNumberField.stringValue = "\(layer.number)"
+                line.lastSegmentField.stringValue = "\(layer.lastSegment)"
+                line.innerRadiusField.stringValue = "\(layer.innerRadius)"
+                line.radialBuildField.stringValue = "\(layer.radialBuild)"
+                line.parentTerminalField.stringValue = "\(layer.terminal)"
+                line.numSpBlkField.stringValue = "\(layer.numSpacerBlocks)"
+                line.spBlkWidthField.stringValue = "\(layer.spBlkWidth)"
+                
+                if layer.numParGroups == 1
+                {
+                    line.oneParGroupButton.state = .on
+                }
+                else if layer.numParGroups == 2
+                {
+                    line.twoParGroupButton.state = .on
+                }
+                else
+                {
+                    ALog("Illegal number of parallel groups")
+                }
+                
+                if layer.currentDirection > 0
+                {
+                    line.plusCurrentButton.state = .on
+                }
+                else if layer.currentDirection < 0
+                {
+                    line.minusCurrentButton.state = .on
+                }
+                else
+                {
+                    ALog("0 current is not allowed")
+                }
+                
+                if layer.cuOrAl == 1
+                {
+                    line.cuButton.state = .on
+                }
+                else if layer.cuOrAl == 2
+                {
+                    line.alButton.state = .on
+                }
+                else
+                {
+                    ALog("Illegal conductor specification")
+                }
+            }
+            
+            
         }
         
         self.openPanel = nil
