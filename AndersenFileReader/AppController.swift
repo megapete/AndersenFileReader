@@ -148,7 +148,41 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 return
             }
             
+            guard txfo.numTerminals > 0 else
+            {
+                DLog("Illegal terminal count!")
+                return
+            }
+            
             terminalVC.addTerminalLines(count: Int(txfo.numTerminals))
+            
+            guard let terminalArray = txfo.terminals as? [PCH_FLD12_Terminal] else
+            {
+                DLog("Problem with terminal array")
+                return
+            }
+            
+            for i in 0..<terminalArray.count
+            {
+                let line = terminalVC.termDataLines[i]
+                let terminal = terminalArray[i]
+                line.termNumberField.stringValue = "\(terminal.number)"
+                line.mvaField.stringValue = "\(terminal.mva)"
+                line.kvField.stringValue = "\(terminal.kv)"
+                
+                if (terminal.connection == 1)
+                {
+                    line.wyeConnectionButton.state = .on
+                }
+                else if (terminal.connection == 2)
+                {
+                    line.deltaConnectionButton.state = .on
+                }
+                else
+                {
+                    DLog("Unknown connection code")
+                }
+            }
             
             
         }

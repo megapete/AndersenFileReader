@@ -8,7 +8,12 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="TerminalDataLineController" customModule="AndersenFileReader" customModuleProvider="target">
             <connections>
+                <outlet property="deltaConnectionButton" destination="ucH-iY-m6M" id="Ln1-60-7Wq"/>
+                <outlet property="kvField" destination="S7w-xF-8IW" id="nOj-wS-hcX"/>
+                <outlet property="mvaField" destination="eQ8-Xh-1TV" id="TIl-b8-L7q"/>
+                <outlet property="termNumberField" destination="X3P-WN-4iH" id="mPi-dh-tf2"/>
                 <outlet property="view" destination="c22-O7-iKe" id="i5i-pF-ykA"/>
+                <outlet property="wyeConnectionButton" destination="d4q-Nd-dJh" id="D9i-4r-nvh"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -31,6 +36,9 @@
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="handleConnectionButtons:" target="-2" id="Ksa-R4-VYl"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ucH-iY-m6M">
                                 <rect key="frame" x="52" y="23" width="32" height="18"/>
@@ -39,6 +47,9 @@
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="handleConnectionButtons:" target="-2" id="Tp5-eR-dbe"/>
+                                </connections>
                             </button>
                         </subviews>
                     </view>

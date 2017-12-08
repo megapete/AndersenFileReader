@@ -21,7 +21,7 @@ class TerminalDataViewController: NSViewController {
         
         var newController = TerminalDataLineController(nibName: nil, bundle: nil)
         
-        // This logic comes from my ImpulseModeler program (I don't actually understand it)
+        // This logic comes from my ImpulseModeler program. Don't forget that on MacOS, the origin is in the BOTTOM-left corner.
         
         let view = newController.view
         
@@ -39,18 +39,20 @@ class TerminalDataViewController: NSViewController {
         }
         
         let yLineOffset = newController.view.frame.height
+        newController.view.frame.origin.y = /* theView.frame.origin.y + */ theView.frame.height - yLineOffset
+        
+        DLog("scrollView.frame: \(scrollView.frame); theView.frame: \(theView.frame); line.frame: \(newController.view.frame)")
         
         for _ in 0..<count
         {
             termDataLines.append(newController)
             theView.addSubview(newController.view)
             
-            let oldViewBottom = newController.view.frame.origin.y + yLineOffset
+            let nextLineBottom = newController.view.frame.origin.y - yLineOffset
             
             newController = TerminalDataLineController(nibName: nil, bundle: nil)
-            newController.view.frame.origin.y = oldViewBottom
+            newController.view.frame.origin.y = nextLineBottom
         }
-        
     }
     
     override func viewDidLoad()
