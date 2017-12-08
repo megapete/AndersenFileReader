@@ -180,11 +180,9 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 }
                 else
                 {
-                    DLog("Unknown connection code")
+                    DLog("Unimplemented connection code")
                 }
             }
-            
-            
         }
         
         self.openPanel = nil
