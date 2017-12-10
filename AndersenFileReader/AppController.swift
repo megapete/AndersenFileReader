@@ -205,10 +205,18 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 return
             }
             
+            // we'll be looping through the layers so we'll grab the segments as we go
+            var segmentArray:[PCH_FLD12_Segment] = []
+            
             for i in 0..<layerArray.count
             {
                 let line = layerVC.layerDataLines[i]
                 let layer = layerArray[i]
+                
+                if let layerSegments = layerArray[i].segments as? [PCH_FLD12_Segment]
+                {
+                    segmentArray.append(contentsOf: layerSegments)
+                }
                 
                 line.layerNumberField.stringValue = "\(layer.number)"
                 line.lastSegmentField.stringValue = "\(layer.lastSegment)"
@@ -256,6 +264,37 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 {
                     ALog("Illegal conductor specification")
                 }
+            }
+            
+            // And finally, terminals
+            guard let segmentVC = inputVC.segmentDataController else
+            {
+                DLog("Could not access Segments Data View")
+                return
+            }
+            
+            guard segmentArray.count >= layerArray.count else
+            {
+                DLog("Illegal segment count!")
+                return
+            }
+            
+            segmentVC.addSegmentLines(count: Int(segmentArray.count))
+            
+            for i in 0..<segmentArray.count
+            {
+                let line = segmentVC.segmentDataLines[i]
+                let segment = segmentArray[i]
+                
+                line.segmentNumberFIeld.stringValue = "\(segment.segmentNumber)"
+                line.zMinField.stringValue = "\(segment.zMin)"
+                line.zMaxField.stringValue = "\(segment.zMax)"
+                line.totalTurnsField.stringValue = "\(segment.turns)"
+                line.activeTurnsFIeld.stringValue = "\(segment.activeTurns)"
+                line.strandsPerTurnField.stringValue = "\(segment.strandsPerTurn)"
+                line.strandsPerLayerField.stringValue = "\(segment.strandsPerLayer)"
+                line.strandDimnRadialField.stringValue = "\(segment.strandR)"
+                line.strandDimnAxialField.stringValue = "\(segment.strandA)"
             }
             
             

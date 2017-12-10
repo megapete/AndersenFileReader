@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D32AF9401FDA17900094B816 /* LayerDataLineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32AF93E1FDA17900094B816 /* LayerDataLineController.swift */; };
 		D32AF9411FDA17900094B816 /* LayerDataLineController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D32AF93F1FDA17900094B816 /* LayerDataLineController.xib */; };
+		D32AF9441FDD688E0094B816 /* SegmentDataLineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32AF9421FDD688E0094B816 /* SegmentDataLineController.swift */; };
+		D32AF9451FDD688E0094B816 /* SegmentDataLineController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D32AF9431FDD688E0094B816 /* SegmentDataLineController.xib */; };
 		D3AD7C1C1FD833A600E19465 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD7C1B1FD833A600E19465 /* AppDelegate.swift */; };
 		D3AD7C1E1FD833A600E19465 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D3AD7C1D1FD833A600E19465 /* Assets.xcassets */; };
 		D3AD7C211FD833A600E19465 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AD7C1F1FD833A600E19465 /* MainMenu.xib */; };
@@ -32,6 +34,8 @@
 /* Begin PBXFileReference section */
 		D32AF93E1FDA17900094B816 /* LayerDataLineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayerDataLineController.swift; sourceTree = "<group>"; };
 		D32AF93F1FDA17900094B816 /* LayerDataLineController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LayerDataLineController.xib; sourceTree = "<group>"; };
+		D32AF9421FDD688E0094B816 /* SegmentDataLineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentDataLineController.swift; sourceTree = "<group>"; };
+		D32AF9431FDD688E0094B816 /* SegmentDataLineController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SegmentDataLineController.xib; sourceTree = "<group>"; };
 		D3AD7C181FD833A600E19465 /* AndersenFileReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AndersenFileReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3AD7C1B1FD833A600E19465 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3AD7C1D1FD833A600E19465 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -105,6 +109,8 @@
 				D32AF93F1FDA17900094B816 /* LayerDataLineController.xib */,
 				D3AD7C3D1FD866F900E19465 /* SegmentDataController.swift */,
 				D3AD7C3E1FD866F900E19465 /* SegmentDataController.xib */,
+				D32AF9421FDD688E0094B816 /* SegmentDataLineController.swift */,
+				D32AF9431FDD688E0094B816 /* SegmentDataLineController.xib */,
 				D3AD7C1D1FD833A600E19465 /* Assets.xcassets */,
 				D3AD7C1F1FD833A600E19465 /* MainMenu.xib */,
 				D3AD7C221FD833A600E19465 /* Info.plist */,
@@ -191,6 +197,7 @@
 				D3AD7C401FD866F900E19465 /* SegmentDataController.xib in Resources */,
 				D3AD7C211FD833A600E19465 /* MainMenu.xib in Resources */,
 				D3AD7C2E1FD8505400E19465 /* InputFileViewController.xib in Resources */,
+				D32AF9451FDD688E0094B816 /* SegmentDataLineController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +211,7 @@
 				D3AD7C3B1FD866D600E19465 /* LayerDataViewController.swift in Sources */,
 				D3AD7C371FD8669700E19465 /* TerminalDataViewController.swift in Sources */,
 				D3AD7C1C1FD833A600E19465 /* AppDelegate.swift in Sources */,
+				D32AF9441FDD688E0094B816 /* SegmentDataLineController.swift in Sources */,
 				D32AF9401FDA17900094B816 /* LayerDataLineController.swift in Sources */,
 				D3CE93C41FD88B440019E61F /* AppController.swift in Sources */,
 				D3AD7C331FD85EF500E19465 /* GeneralDataViewController.swift in Sources */,
