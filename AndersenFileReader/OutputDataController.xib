@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="OutputDataController" customModule="AndersenFileReader" customModuleProvider="target">
             <connections>
+                <outlet property="theView" destination="yMY-CP-EPa" id="Aa1-n1-nl2"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -16,16 +17,35 @@
             <rect key="frame" x="0.0" y="0.0" width="730" height="430"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eMa-pF-LGi">
-                    <rect key="frame" x="373" y="131" width="123" height="17"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="This is a view, dork!" id="P6C-cV-YfK">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tKY-HK-BHn">
+                    <rect key="frame" x="0.0" y="0.0" width="730" height="430"/>
+                    <clipView key="contentView" id="6G6-tv-5vD">
+                        <rect key="frame" x="1" y="1" width="713" height="413"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yMY-CP-EPa">
+                                <rect key="frame" x="0.0" y="0.0" width="698" height="398"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
+                    </clipView>
+                    <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="2VC-aZ-gyn">
+                        <rect key="frame" x="1" y="414" width="713" height="15"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="UPO-BP-1eb">
+                        <rect key="frame" x="714" y="1" width="15" height="413"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
             </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="tKY-HK-BHn" secondAttribute="bottom" id="JtI-XG-4z9"/>
+                <constraint firstAttribute="trailing" secondItem="tKY-HK-BHn" secondAttribute="trailing" id="TwC-Yi-TBo"/>
+                <constraint firstItem="tKY-HK-BHn" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="oK4-MO-W6R"/>
+                <constraint firstItem="tKY-HK-BHn" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="p9u-53-7NV"/>
+            </constraints>
         </customView>
     </objects>
 </document>

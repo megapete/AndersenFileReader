@@ -68,13 +68,17 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             
             ShowDetailsForTxfo(txfo: outputData.inputData!, controller: outputVC)
             
-            let outputTabItem = NSTabViewItem(viewController: OutputDataController(nibName: nil, bundle: nil))
+            let outputDataController = OutputDataController(nibName: nil, bundle: nil)
+            
+            let outputTabItem = NSTabViewItem(viewController: outputDataController)
             outputTabItem.label = "Output"
             
             if let tabView = outputVC.tabView
             {
                 tabView.addTabViewItem(outputTabItem)
             }
+            
+            outputDataController.addOutputLines(count: 6)
             
         }
         
