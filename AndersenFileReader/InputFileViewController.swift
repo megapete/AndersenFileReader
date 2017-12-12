@@ -26,6 +26,12 @@ class InputFileViewController: NSViewController {
     // Initializer to stick the new input file view right into a window
     convenience init(intoWindow:NSWindow)
     {
+        if !intoWindow.isVisible
+        {
+            intoWindow.makeKeyAndOrderFront(nil)
+        }
+        
+        // DLog("Is the window visible: \(intoWindow.isVisible)")
         self.init(nibName: nil, bundle: nil)
         
         if let winView = intoWindow.contentView
