@@ -12,13 +12,14 @@ class OutputDataController: NSViewController {
 
     @IBOutlet var theView: NSView!
     var outputDataLines:[OutputDataLineController] = []
+    var outputDataSegments:[SegmentData]? = nil
     
     private var numLines = 0
     
     // Since this controller is added programmatically, we need to do some fancier footwork than the other tab views. NSViewController loads the view lazily, so unless the view is actually loaded, we defer actually adding the data lines until the viewDidLoad() call.
     func addOutputLines(count: Int)
     {
-        if self.isViewLoaded
+        if self.isViewLoaded && self.numLines > 0
         {
             self.doAddOutputLines(count: count)
         }
@@ -68,6 +69,31 @@ class OutputDataController: NSViewController {
         }
     }
     
+    
+    private func setOutputDataAtLine(_ line:Int, data:SegmentData)
+    {
+        outputDataLines[line].segmentNumberLabel.stringValue = "\(data.number)"
+        outputDataLines[line].ampTurnsLabel.stringValue = "\(data.ampTurns)"
+        outputDataLines[line].kVALabel.stringValue = "\(data.kVA)"
+        outputDataLines[line].dcLossLabel.stringValue = "\(data.dcLoss)"
+        outputDataLines[line].eddyLossAxialFluxLabel.stringValue = "\(data.eddyLossAxialFlux)"
+        outputDataLines[line].eddyLossRadialFluxLabel.stringValue = "\(data.eddyLossRadialFlux)"
+        outputDataLines[line].eddyLossPuAverageLabel.stringValue = "\(data.eddyPUaverage)"
+        outputDataLines[line].eddyLossPuMaxLabel.stringValue = "\(data.eddyPUmax)"
+        outputDataLines[line].eddyLossPuMaxRectLabel.stringValue = "(\(data.eddyMaxRect.origin.x), \(data.eddyMaxRect.origin.y)) - (\(data.eddyMaxRect.origin.x + data.eddyMaxRect.width), \(data.eddyMaxRect.origin.y + data.eddyMaxRect.height))"
+        outputDataLines[line].scTotalRadialLabel.stringValue = "\(data.scForceTotalRadial)"
+        outputDataLines[line].scTotalAxialLabel.stringValue = "\(data.scForceTotalAxial)"
+        outputDataLines[line].scMinRadialLabel.stringValue = "\(data.scMinRadially)"
+        outputDataLines[line].scMaxRadialLabel.stringValue = "\(data.scMaxRadially)"
+        outputDataLines[line].scMaxAccumAxialLabel.stringValue = "\(data.scMaxAccumAxially)"
+        outputDataLines[line].scMaxPerVolAxialLabel.stringValue = "\(data.scAxially)"
+        outputDataLines[line].scRadialTensionCompLabel.stringValue = "\(data.scMaxTensionCompression)"
+        outputDataLines[line].minNumSpacerBarsLabel.stringValue = "\(data.scMinSpacerBars)"
+        outputDataLines[line].axialForceInBlocksLabel.stringValue = "\(data.scForceInSpacerBlocks)"
+        outputDataLines[line].combinedForceLabel.stringValue = "\(data.scCombinedForce)"
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -76,6 +102,18 @@ class OutputDataController: NSViewController {
         if (self.numLines > 0)
         {
             doAddOutputLines(count: self.numLines)
+            
+            guard let data = outputDataSegments else
+            {
+                DLog("Data segments were not defined!")
+                return
+            }
+            
+            for i in 0..<self.numLines
+            {
+                self.setOutputDataAtLine(i, data: data[i])
+            }
+            
         }
     }
     

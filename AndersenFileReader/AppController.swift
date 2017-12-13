@@ -78,7 +78,36 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 tabView.addTabViewItem(outputTabItem)
             }
             
-            outputDataController.addOutputLines(count: 6)
+            guard let segmentsAsData = outputData.segmentData as? [Data] else
+            {
+                DLog("Could not get segments as Data")
+                return
+            }
+            
+            var segmentArray:[SegmentData] = []
+            // we need to use stride because that is the memory "distance" between instances in an array (which is what we have in this case). The actual size of the struct is MemoryLayout<SegmentData>..size
+            let segmentDataStride = MemoryLayout<SegmentData>.stride
+            
+            for nextData in segmentsAsData
+            {
+                let segmentPtr = UnsafeMutablePointer<SegmentData>.allocate(capacity: 1)
+                let segmentBuffer = UnsafeMutableBufferPointer(start: segmentPtr, count: 1)
+                let numBytes = nextData.copyBytes(to: segmentBuffer)
+                
+                if numBytes != segmentDataStride
+                {
+                    DLog("Stride: \(segmentDataStride); Bytes Transferred: \(numBytes)")
+                    return
+                }
+                
+                segmentArray.append(segmentBuffer[0])
+                
+                segmentPtr.deallocate(capacity: 1)
+            }
+            
+            
+            outputDataController.addOutputLines(count: segmentArray.count)
+            outputDataController.outputDataSegments = segmentArray
             
         }
         
@@ -127,7 +156,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         self.openPanel = nil
     }
     
-    
+    // This routine returns the number of segments in the model, which is not easily retrieved from the PCH_FLD12_TxfoDetails
     func ShowDetailsForTxfo(txfo:PCH_FLD12_TxfoDetails, controller:InputFileViewController)
     {
         guard let generalVC = controller.generalDataController else

@@ -8,6 +8,25 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="OutputDataLineController" customModule="AndersenFileReader" customModuleProvider="target">
             <connections>
+                <outlet property="ampTurnsLabel" destination="UE4-0f-OpM" id="vuk-dh-vox"/>
+                <outlet property="axialForceInBlocksLabel" destination="jz2-hD-Anj" id="S0H-l9-obK"/>
+                <outlet property="combinedForceLabel" destination="LNU-a6-1g9" id="lcn-eB-bgr"/>
+                <outlet property="dcLossLabel" destination="T7W-Ud-yuF" id="LqY-wf-8XY"/>
+                <outlet property="eddyLossAxialFluxLabel" destination="UHP-Hx-lDO" id="jLo-OW-7XG"/>
+                <outlet property="eddyLossPuAverageLabel" destination="PnL-wJ-CLU" id="mA3-bG-rHu"/>
+                <outlet property="eddyLossPuMaxLabel" destination="2bJ-mE-gdU" id="8IV-jn-mzq"/>
+                <outlet property="eddyLossPuMaxRectLabel" destination="4VA-Nb-l5S" id="aSt-wV-Ikb"/>
+                <outlet property="eddyLossRadialFluxLabel" destination="llB-Qg-SvH" id="yOa-K9-YIQ"/>
+                <outlet property="kVALabel" destination="1le-Xn-PxP" id="b0W-mJ-5vk"/>
+                <outlet property="minNumSpacerBarsLabel" destination="gcw-4x-WKR" id="GS3-DK-Kuq"/>
+                <outlet property="scMaxAccumAxialLabel" destination="RuI-fH-9Cw" id="dWd-Sh-aSH"/>
+                <outlet property="scMaxPerVolAxialLabel" destination="HPf-3C-ABs" id="STe-oe-BuG"/>
+                <outlet property="scMaxRadialLabel" destination="qRk-1l-kPr" id="Jtu-6d-Wxr"/>
+                <outlet property="scMinRadialLabel" destination="9Ye-RW-3qs" id="l3H-Gy-lA3"/>
+                <outlet property="scRadialTensionCompLabel" destination="IjK-4F-15q" id="X5w-cL-P8g"/>
+                <outlet property="scTotalAxialLabel" destination="vbs-PI-jzg" id="VFw-K3-6Rx"/>
+                <outlet property="scTotalRadialLabel" destination="wCl-sM-LqK" id="qMJ-Ni-0B9"/>
+                <outlet property="segmentNumberLabel" destination="I3o-27-UFY" id="CnB-ck-WKs"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -44,7 +63,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IjK-4F-15q">
-                                <rect key="frame" x="39" y="23" width="91" height="17"/>
+                                <rect key="frame" x="18" y="23" width="132" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="Qd2-XI-CfT">
                                     <font key="font" metaFont="system"/>
@@ -63,7 +82,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gcw-4x-WKR">
-                                <rect key="frame" x="47" y="23" width="37" height="17"/>
+                                <rect key="frame" x="33" y="23" width="65" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="4jo-Tv-58e">
                                     <font key="font" metaFont="system"/>
@@ -82,7 +101,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jz2-hD-Anj">
-                                <rect key="frame" x="46" y="23" width="37" height="17"/>
+                                <rect key="frame" x="22" y="23" width="84" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="icw-cu-Zwb">
                                     <font key="font" metaFont="system"/>
@@ -94,21 +113,21 @@
                     </view>
                 </box>
                 <box fixedFrame="YES" title="Peak Short Circuit Forces" translatesAutoresizingMaskIntoConstraints="NO" id="PE0-Ch-xTS">
-                    <rect key="frame" x="48" y="101" width="647" height="97"/>
+                    <rect key="frame" x="17" y="101" width="696" height="97"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView" id="H7M-yi-QZf">
-                        <rect key="frame" x="2" y="2" width="643" height="80"/>
+                        <rect key="frame" x="2" y="2" width="692" height="80"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <box fixedFrame="YES" title="Total Radial" translatesAutoresizingMaskIntoConstraints="NO" id="eT2-0n-h4n">
-                                <rect key="frame" x="17" y="8" width="89" height="60"/>
+                                <rect key="frame" x="17" y="8" width="102" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="S0X-eJ-dS9">
-                                    <rect key="frame" x="2" y="2" width="85" height="43"/>
+                                    <rect key="frame" x="2" y="2" width="98" height="43"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wCl-sM-LqK">
-                                            <rect key="frame" x="10" y="13" width="64" height="17"/>
+                                            <rect key="frame" x="5" y="13" width="89" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="fea-vv-AOH">
                                                 <font key="font" metaFont="system"/>
@@ -120,14 +139,14 @@
                                 </view>
                             </box>
                             <box fixedFrame="YES" title="Total Axial" translatesAutoresizingMaskIntoConstraints="NO" id="nss-TO-CTe">
-                                <rect key="frame" x="108" y="8" width="89" height="60"/>
+                                <rect key="frame" x="121" y="8" width="105" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="KTS-kf-hT5">
-                                    <rect key="frame" x="2" y="2" width="85" height="43"/>
+                                    <rect key="frame" x="2" y="2" width="101" height="43"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vbs-PI-jzg">
-                                            <rect key="frame" x="10" y="13" width="64" height="17"/>
+                                            <rect key="frame" x="12" y="13" width="77" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="z7p-dL-en3">
                                                 <font key="font" metaFont="system"/>
@@ -138,53 +157,15 @@
                                     </subviews>
                                 </view>
                             </box>
-                            <box fixedFrame="YES" title="Min. Radial" translatesAutoresizingMaskIntoConstraints="NO" id="9me-nG-FXM">
-                                <rect key="frame" x="199" y="8" width="89" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <view key="contentView" id="R7a-5Z-Ntj">
-                                    <rect key="frame" x="2" y="2" width="85" height="43"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ye-RW-3qs">
-                                            <rect key="frame" x="10" y="13" width="64" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="ntH-9r-teN">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
-                                    </subviews>
-                                </view>
-                            </box>
-                            <box fixedFrame="YES" title="Max. Radial" translatesAutoresizingMaskIntoConstraints="NO" id="ODP-tc-Eh7">
-                                <rect key="frame" x="290" y="8" width="89" height="60"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <view key="contentView" id="ExR-EG-bJQ">
-                                    <rect key="frame" x="2" y="2" width="85" height="43"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qRk-1l-kPr">
-                                            <rect key="frame" x="10" y="13" width="64" height="17"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="9UY-QT-wFh">
-                                                <font key="font" metaFont="system"/>
-                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                            </textFieldCell>
-                                        </textField>
-                                    </subviews>
-                                </view>
-                            </box>
                             <box fixedFrame="YES" title="Max. Accum. Axial" translatesAutoresizingMaskIntoConstraints="NO" id="Wfv-vb-l7U">
-                                <rect key="frame" x="381" y="8" width="122" height="60"/>
+                                <rect key="frame" x="430" y="8" width="122" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="vFS-xm-QMm">
                                     <rect key="frame" x="2" y="2" width="118" height="43"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RuI-fH-9Cw">
-                                            <rect key="frame" x="27" y="13" width="64" height="17"/>
+                                            <rect key="frame" x="13" y="13" width="93" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="74C-9B-hSi">
                                                 <font key="font" metaFont="system"/>
@@ -196,16 +177,54 @@
                                 </view>
                             </box>
                             <box fixedFrame="YES" title="Max. Per Vol. Axial" translatesAutoresizingMaskIntoConstraints="NO" id="lWT-hi-Cbw">
-                                <rect key="frame" x="505" y="8" width="121" height="60"/>
+                                <rect key="frame" x="554" y="8" width="121" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="ShT-m8-Gya">
                                     <rect key="frame" x="2" y="2" width="117" height="43"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HPf-3C-ABs">
-                                            <rect key="frame" x="26" y="13" width="64" height="17"/>
+                                            <rect key="frame" x="12" y="13" width="93" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="ax2-Mb-NNJ">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                            </box>
+                            <box fixedFrame="YES" title="Min. Radial" translatesAutoresizingMaskIntoConstraints="NO" id="9me-nG-FXM">
+                                <rect key="frame" x="228" y="8" width="98" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" id="R7a-5Z-Ntj">
+                                    <rect key="frame" x="2" y="2" width="94" height="43"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Ye-RW-3qs">
+                                            <rect key="frame" x="1" y="13" width="92" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="ntH-9r-teN">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                            </box>
+                            <box fixedFrame="YES" title="Max. Radial" translatesAutoresizingMaskIntoConstraints="NO" id="ODP-tc-Eh7">
+                                <rect key="frame" x="328" y="8" width="100" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <view key="contentView" id="ExR-EG-bJQ">
+                                    <rect key="frame" x="2" y="2" width="96" height="43"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qRk-1l-kPr">
+                                            <rect key="frame" x="1" y="13" width="94" height="17"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                            <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="9UY-QT-wFh">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -218,10 +237,10 @@
                     </view>
                 </box>
                 <box fixedFrame="YES" title="Eddy Current Losses" translatesAutoresizingMaskIntoConstraints="NO" id="dEz-qa-W6N">
-                    <rect key="frame" x="48" y="202" width="647" height="97"/>
+                    <rect key="frame" x="17" y="202" width="696" height="97"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <view key="contentView" id="h0I-VD-c3K">
-                        <rect key="frame" x="2" y="2" width="643" height="80"/>
+                        <rect key="frame" x="2" y="2" width="692" height="80"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <box fixedFrame="YES" title="Axial Flux (kW)" translatesAutoresizingMaskIntoConstraints="NO" id="Gu8-es-JpK">
@@ -232,7 +251,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UHP-Hx-lDO">
-                                            <rect key="frame" x="24" y="13" width="64" height="17"/>
+                                            <rect key="frame" x="11" y="13" width="91" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="qo3-RZ-Ey2">
                                                 <font key="font" metaFont="system"/>
@@ -251,7 +270,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PnL-wJ-CLU">
-                                            <rect key="frame" x="24" y="13" width="64" height="17"/>
+                                            <rect key="frame" x="11" y="13" width="91" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="HUX-mz-Epa">
                                                 <font key="font" metaFont="system"/>
@@ -270,7 +289,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="llB-Qg-SvH">
-                                            <rect key="frame" x="24" y="13" width="64" height="17"/>
+                                            <rect key="frame" x="11" y="13" width="91" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="3yq-Ol-WWh">
                                                 <font key="font" metaFont="system"/>
@@ -289,7 +308,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2bJ-mE-gdU">
-                                            <rect key="frame" x="24" y="13" width="64" height="17"/>
+                                            <rect key="frame" x="11" y="13" width="91" height="17"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="U9a-iK-x8U">
                                                 <font key="font" metaFont="system"/>
@@ -301,17 +320,17 @@
                                 </view>
                             </box>
                             <box fixedFrame="YES" title="P.U. Max Rectangle" translatesAutoresizingMaskIntoConstraints="NO" id="Joe-pr-orB">
-                                <rect key="frame" x="493" y="8" width="145" height="60"/>
+                                <rect key="frame" x="493" y="8" width="182" height="60"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <view key="contentView" id="BOf-JL-tjP">
-                                    <rect key="frame" x="2" y="2" width="141" height="43"/>
+                                    <rect key="frame" x="2" y="2" width="178" height="43"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4VA-Nb-l5S">
-                                            <rect key="frame" x="10" y="13" width="122" height="17"/>
+                                            <rect key="frame" x="-2" y="16" width="182" height="11"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="4cP-pw-lie">
-                                                <font key="font" metaFont="system"/>
+                                                <font key="font" metaFont="system" size="9"/>
                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
@@ -330,7 +349,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T7W-Ud-yuF">
-                                <rect key="frame" x="24" y="23" width="64" height="17"/>
+                                <rect key="frame" x="9" y="23" width="91" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="SMH-u5-J7d">
                                     <font key="font" metaFont="system"/>
@@ -349,7 +368,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UE4-0f-OpM">
-                                <rect key="frame" x="25" y="23" width="64" height="17"/>
+                                <rect key="frame" x="12" y="23" width="90" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="a0X-Yg-qrO">
                                     <font key="font" metaFont="system"/>
@@ -368,7 +387,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1le-Xn-PxP">
-                                <rect key="frame" x="24" y="23" width="64" height="17"/>
+                                <rect key="frame" x="11" y="23" width="91" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="ExQ-wI-j5k">
                                     <font key="font" metaFont="system"/>
@@ -387,7 +406,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LNU-a6-1g9">
-                                <rect key="frame" x="38" y="23" width="37" height="17"/>
+                                <rect key="frame" x="18" y="23" width="77" height="17"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Label" id="9pc-X1-2nl">
                                     <font key="font" metaFont="system"/>
@@ -403,7 +422,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </box>
             </subviews>
-            <point key="canvasLocation" x="102" y="103"/>
+            <point key="canvasLocation" x="40" y="104"/>
         </customView>
     </objects>
 </document>
