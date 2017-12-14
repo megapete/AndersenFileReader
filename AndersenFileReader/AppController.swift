@@ -13,9 +13,59 @@ class AppController: NSObject, NSOpenSavePanelDelegate
     // A reference to the main window (so we don't need to make any cross-references to the app delegate)
     @IBOutlet weak var window: NSWindow!
     
+    @IBOutlet weak var saveInputFileItem: NSMenuItem!
+    
     // Variable used to hold the current openPanel so the delegate routine can respond correctly
     var openPanel:NSOpenPanel? = nil
     var currentMainWindowViewController:InputFileViewController? = nil
+    
+    var currentTransformer:PCH_FLD12_TxfoDetails? = nil
+    var currentFileName:String? = nil
+    
+    @IBAction func handleSaveFLD12InputFile(_ sender: Any)
+    {
+        let savePanel = NSSavePanel()
+        
+        savePanel.message = "Save FLD12 Input File"
+        savePanel.canCreateDirectories = true
+        savePanel.allowedFileTypes = ["public.text"]
+        
+        if savePanel.runModal() == .OK
+        {
+            let fileString = PCH_FLD12_Library.createFLD12InputFile(withTxfo: self.currentTransformer!)
+            
+            guard let fileURL = savePanel.url else
+            {
+                DLog("URL not returned!")
+                
+                ShowSimpleCriticalPanelWithString("A serious error occurred (could not get file URL).")
+                
+                return
+            }
+            
+            do
+            {
+                try fileString.write(to: fileURL, atomically: false, encoding: .utf8)
+            }
+            catch
+            {
+                DLog("Could not create input file!")
+                ShowSimpleCriticalPanelWithString("Could not create input file!")
+                return
+            }
+        }
+    }
+    
+    // take care of enabling menu items here
+    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool
+    {
+        if menuItem == self.saveInputFileItem
+        {
+            return currentTransformer != nil
+        }
+        
+        return true
+    }
     
     
     @IBAction func handleOpenFLD12OutputFile(_ sender: Any)
@@ -39,6 +89,9 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             guard let fileURL = openPanel.url else
             {
                 DLog("URL not returned!")
+                
+                ShowSimpleCriticalPanelWithString("A serious error occurred (could not get file URL).")
+                
                 self.openPanel = nil
                 return
             }
@@ -129,6 +182,8 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             
             outputDataController.handleUpdate(segmentData: segmentArray)
             
+            self.currentFileName = fileURL.deletingPathExtension().lastPathComponent
+            self.currentTransformer = outputData.inputData
         }
         
         self.openPanel = nil
@@ -194,6 +249,9 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             }
             
             ShowDetailsForTxfo(txfo: txfo, controller: inputSubView!)
+            
+            self.currentFileName = fileURL.deletingPathExtension().lastPathComponent
+            self.currentTransformer = txfo
             
         } // end if openPanel
         

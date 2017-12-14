@@ -19,6 +19,7 @@
         </customObject>
         <customObject id="eHZ-cW-bVH" customClass="AppController" customModule="AndersenFileReader" customModuleProvider="target">
             <connections>
+                <outlet property="saveInputFileItem" destination="6uq-Gq-Uje" id="w0W-lb-jU3"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="cIJ-Qt-dOf"/>
             </connections>
         </customObject>
@@ -112,6 +113,11 @@
                             <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
                                 <connections>
                                     <action selector="saveDocument:" target="-1" id="teZ-XB-qJY"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Save FLD12 Input File..." keyEquivalent="s" id="6uq-Gq-Uje">
+                                <connections>
+                                    <action selector="handleSaveFLD12InputFile:" target="eHZ-cW-bVH" id="4CS-n2-KbN"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Save As…" keyEquivalent="S" id="Bw7-FT-i3A">
