@@ -16,15 +16,28 @@ class OutputDataController: NSViewController {
     
     private var numLines = 0
     
-    // Since this controller is added programmatically, we need to do some fancier footwork than the other tab views. NSViewController loads the view lazily, so unless the view is actually loaded, we defer actually adding the data lines until the viewDidLoad() call.
-    func addOutputLines(count: Int)
+    func handleUpdate(segmentData:[SegmentData])
     {
-        if self.isViewLoaded && self.numLines > 0
+        self.outputDataLines = []
+        self.outputDataSegments = segmentData
+        self.numLines = segmentData.count
+        
+        guard self.numLines > 0 else
         {
-            self.doAddOutputLines(count: count)
+            return
         }
         
-        numLines = count
+        if self.isViewLoaded
+        {
+            self.theView.subviews = []
+            
+            doAddOutputLines(count: self.numLines)
+            
+            for i in 0..<self.numLines
+            {
+                self.setOutputDataAtLine(i, data: segmentData[i])
+            }
+        }
     }
     
     private func doAddOutputLines(count:Int)
@@ -94,11 +107,11 @@ class OutputDataController: NSViewController {
     }
     
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         // Do view setup here.
-        DLog("Output view did load")
-        
+                
         if (self.numLines > 0)
         {
             doAddOutputLines(count: self.numLines)

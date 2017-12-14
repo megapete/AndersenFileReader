@@ -84,8 +84,9 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 return
             }
             
+            // So this is the method I came up with to convert back the NSArray of SegmentData structs that I had to convert to NSData objects in the library (whew!). It's really ugly and I could probably do something a bit more efficient, but this seems to work.
             var segmentArray:[SegmentData] = []
-            // we need to use stride because that is the memory "distance" between instances in an array (which is what we have in this case). The actual size of the struct is MemoryLayout<SegmentData>..size
+            // we need to use stride because that is the memory "distance" between instances in an array (which is what we have in this case). The actual size of the struct is MemoryLayout<SegmentData>.size
             let segmentDataStride = MemoryLayout<SegmentData>.stride
             
             for nextData in segmentsAsData
@@ -102,12 +103,11 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 
                 segmentArray.append(segmentBuffer[0])
                 
+                // since we allocated the memory for the pointer, we are responsible to deallocate it as well
                 segmentPtr.deallocate(capacity: 1)
             }
             
-            
-            outputDataController.addOutputLines(count: segmentArray.count)
-            outputDataController.outputDataSegments = segmentArray
+            outputDataController.handleUpdate(segmentData: segmentArray)
             
         }
         
@@ -262,7 +262,6 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             return
         }
         
-        terminalVC.addTerminalLines(count: Int(txfo.numTerminals))
         
         guard let terminalArray = txfo.terminals as? [PCH_FLD12_Terminal] else
         {
@@ -270,27 +269,8 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             return
         }
         
-        for i in 0..<terminalArray.count
-        {
-            let line = terminalVC.termDataLines[i]
-            let terminal = terminalArray[i]
-            line.termNumberField.stringValue = "\(terminal.number)"
-            line.mvaField.stringValue = "\(terminal.mva)"
-            line.kvField.stringValue = "\(terminal.kv)"
-            
-            if (terminal.connection == 1)
-            {
-                line.wyeConnectionButton.state = .on
-            }
-            else if (terminal.connection == 2)
-            {
-                line.deltaConnectionButton.state = .on
-            }
-            else
-            {
-                DLog("Unimplemented connection code")
-            }
-        }
+        terminalVC.handleUpdate(terminalData: terminalArray)
+        
         
         // Layers
         guard let layerVC = controller.layerDataController else
@@ -305,7 +285,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             return
         }
         
-        layerVC.addLayerLines(count: Int(txfo.numLayers))
+        // layerVC.addLayerLines(count: Int(txfo.numLayers))
         
         guard let layerArray = txfo.layers as? [PCH_FLD12_Layer] else
         {
@@ -313,68 +293,20 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             return
         }
         
-        // we'll be looping through the layers so we'll grab the segments as we go
+        layerVC.handleUpdate(layerData: layerArray)
+        
+        // we'll loop through the layers and grab the segments
         var segmentArray:[PCH_FLD12_Segment] = []
         
-        for i in 0..<layerArray.count
+        for nextLayer in layerArray
         {
-            let line = layerVC.layerDataLines[i]
-            let layer = layerArray[i]
-            
-            if let layerSegments = layerArray[i].segments as? [PCH_FLD12_Segment]
+            if let layerSegments = nextLayer.segments as? [PCH_FLD12_Segment]
             {
                 segmentArray.append(contentsOf: layerSegments)
             }
-            
-            line.layerNumberField.stringValue = "\(layer.number)"
-            line.lastSegmentField.stringValue = "\(layer.lastSegment)"
-            line.innerRadiusField.stringValue = "\(layer.innerRadius)"
-            line.radialBuildField.stringValue = "\(layer.radialBuild)"
-            line.parentTerminalField.stringValue = "\(layer.terminal)"
-            line.numSpBlkField.stringValue = "\(layer.numSpacerBlocks)"
-            line.spBlkWidthField.stringValue = "\(layer.spBlkWidth)"
-            
-            if layer.numParGroups == 1
-            {
-                line.oneParGroupButton.state = .on
-            }
-            else if layer.numParGroups == 2
-            {
-                line.twoParGroupButton.state = .on
-            }
-            else
-            {
-                ALog("Illegal number of parallel groups")
-            }
-            
-            if layer.currentDirection > 0
-            {
-                line.plusCurrentButton.state = .on
-            }
-            else if layer.currentDirection < 0
-            {
-                line.minusCurrentButton.state = .on
-            }
-            else
-            {
-                ALog("0 current is not allowed")
-            }
-            
-            if layer.cuOrAl == 1
-            {
-                line.cuButton.state = .on
-            }
-            else if layer.cuOrAl == 2
-            {
-                line.alButton.state = .on
-            }
-            else
-            {
-                ALog("Illegal conductor specification")
-            }
         }
         
-        // And finally, terminals
+        // And finally, segments
         guard let segmentVC = controller.segmentDataController else
         {
             DLog("Could not access Segments Data View")
@@ -387,23 +319,8 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             return
         }
         
-        segmentVC.addSegmentLines(count: Int(segmentArray.count))
+        segmentVC.handleUpdate(segmentData: segmentArray)
         
-        for i in 0..<segmentArray.count
-        {
-            let line = segmentVC.segmentDataLines[i]
-            let segment = segmentArray[i]
-            
-            line.segmentNumberFIeld.stringValue = "\(segment.segmentNumber)"
-            line.zMinField.stringValue = "\(segment.zMin)"
-            line.zMaxField.stringValue = "\(segment.zMax)"
-            line.totalTurnsField.stringValue = "\(segment.turns)"
-            line.activeTurnsFIeld.stringValue = "\(segment.activeTurns)"
-            line.strandsPerTurnField.stringValue = "\(segment.strandsPerTurn)"
-            line.strandsPerLayerField.stringValue = "\(segment.strandsPerLayer)"
-            line.strandDimnRadialField.stringValue = "\(segment.strandR)"
-            line.strandDimnAxialField.stringValue = "\(segment.strandA)"
-        }
     }
     
     

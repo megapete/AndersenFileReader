@@ -8,12 +8,56 @@
 
 import Cocoa
 
+
+
 class SegmentDataController: NSViewController {
 
     @IBOutlet weak var theView: NSView!
     var segmentDataLines:[SegmentDataLineController] = []
+    var segmentData:[PCH_FLD12_Segment]? = nil
     
-    func addSegmentLines(count:Int)
+    private var numLines = 0
+
+    
+    func handleUpdate(segmentData:[PCH_FLD12_Segment])
+    {
+        self.segmentDataLines = []
+        self.segmentData = segmentData
+        self.numLines = segmentData.count
+        
+        guard self.numLines > 0 else
+        {
+            return
+        }
+        
+        if self.isViewLoaded
+        {
+            self.theView.subviews = []
+            
+            doAddSegmentLines(count: self.numLines)
+            
+            for i in 0..<self.numLines
+            {
+                self.setSegmentDataAtLine(i, data: segmentData[i])
+            }
+        }
+    }
+    
+    private func setSegmentDataAtLine(_ line:Int, data:PCH_FLD12_Segment)
+    {
+        segmentDataLines[line].segmentNumberFIeld.stringValue = "\(data.segmentNumber)"
+        segmentDataLines[line].zMinField.stringValue = "\(data.zMin)"
+        segmentDataLines[line].zMaxField.stringValue = "\(data.zMax)"
+        segmentDataLines[line].totalTurnsField.stringValue = "\(data.turns)"
+        segmentDataLines[line].activeTurnsFIeld.stringValue = "\(data.activeTurns)"
+        segmentDataLines[line].strandsPerTurnField.stringValue = "\(data.strandsPerTurn)"
+        segmentDataLines[line].strandsPerLayerField.stringValue = "\(data.strandsPerLayer)"
+        segmentDataLines[line].strandDimnAxialField.stringValue = "\(data.strandA)"
+        segmentDataLines[line].strandDimnRadialField.stringValue = "\(data.strandR)"
+    }
+    
+    
+    func doAddSegmentLines(count:Int)
     {
         // var topLevelObjects:NSArray?
         // var lastFrame = NSRect(x: 0.0, y: 0.0, width: 0.0, height: 0.0)
@@ -55,9 +99,29 @@ class SegmentDataController: NSViewController {
         }
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         // Do view setup here.
+        
+        // self.viewIsValid = true
+        
+        if (self.numLines > 0)
+        {
+            doAddSegmentLines(count: self.numLines)
+            
+            guard let data = segmentData else
+            {
+                DLog("Segment data was not defined!")
+                return
+            }
+            
+            for i in 0..<self.numLines
+            {
+                self.setSegmentDataAtLine(i, data: data[i])
+            }
+            
+        }
     }
     
 }
