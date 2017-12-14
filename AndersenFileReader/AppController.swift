@@ -15,7 +15,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
     
     // Variable used to hold the current openPanel so the delegate routine can respond correctly
     var openPanel:NSOpenPanel? = nil
-    // var currentMainWindowViewController:NSViewController? = nil
+    var currentMainWindowViewController:InputFileViewController? = nil
     
     
     @IBAction func handleOpenFLD12OutputFile(_ sender: Any)
@@ -60,11 +60,23 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             guard let outputData = PCH_FLD12_OutputData(outputFile: outputFileAsString) else
             {
                 DLog("Bad file format")
+                
+                ShowSimpleCriticalPanelWithString("A serious error occurred (the choice is not a valid FLD12 output file).")
+                
                 self.openPanel = nil
                 return
             }
             
-            let outputVC = InputFileViewController(intoWindow: self.window)
+            // we only need a new InputFileViewController if there isn't already one
+            var inputSubView = currentMainWindowViewController
+            
+            if inputSubView == nil
+            {
+                inputSubView = InputFileViewController(intoWindow: self.window)
+                currentMainWindowViewController = inputSubView
+            }
+            
+            let outputVC = inputSubView!
             
             ShowDetailsForTxfo(txfo: outputData.inputData!, controller: outputVC)
             
@@ -81,6 +93,10 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             guard let segmentsAsData = outputData.segmentData as? [Data] else
             {
                 DLog("Could not get segments as Data")
+                
+                ShowSimpleCriticalPanelWithString("A serious error occurred (could not read array as Data).")
+                
+                self.openPanel = nil
                 return
             }
             
@@ -98,6 +114,10 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 if numBytes != segmentDataStride
                 {
                     DLog("Stride: \(segmentDataStride); Bytes Transferred: \(numBytes)")
+                    
+                    ShowSimpleCriticalPanelWithString("A serious error occurred (data size does not match required size).")
+                    
+                    self.openPanel = nil
                     return
                 }
                 
@@ -136,6 +156,9 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             guard let fileURL = openPanel.url else
             {
                 DLog("URL not returned!")
+                
+                ShowSimpleCriticalPanelWithString("A serious error occurred (could not get file URL).")
+                
                 self.openPanel = nil
                 return
             }
@@ -143,17 +166,58 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             guard let txfo = PCH_FLD12_TxfoDetails(url: fileURL) else
             {
                 DLog("File is not in the required FLD12 format!")
+                
+                ShowSimpleCriticalPanelWithString("A serious error occurred (the choice is not a valid FLD12 input file).")
+                
                 self.openPanel = nil
                 return
             }
             
-            let inputVC = InputFileViewController(intoWindow: self.window)
+            // we only need a new InputFileViewController if there isn't already one
+            var inputSubView = currentMainWindowViewController
             
-            ShowDetailsForTxfo(txfo: txfo, controller: inputVC)
+            if inputSubView == nil
+            {
+                inputSubView = InputFileViewController(intoWindow: self.window)
+                currentMainWindowViewController = inputSubView
+            }
+            else
+            {
+                // remove the Output tab, if it's there
+                if let tabView = inputSubView!.tabView
+                {
+                    if tabView.numberOfTabViewItems > PCH_INPUT_SEGMENTS_TAB + 1
+                    {
+                        tabView.removeTabViewItem(tabView.tabViewItem(at: PCH_INPUT_SEGMENTS_TAB + 1))
+                    }
+                }
+            }
+            
+            ShowDetailsForTxfo(txfo: txfo, controller: inputSubView!)
             
         } // end if openPanel
         
         self.openPanel = nil
+    }
+    
+    func ShowSimpleWarningPanelWithString(_ wString:String)
+    {
+        let theAlert = NSAlert()
+        theAlert.alertStyle = .warning
+        theAlert.informativeText = wString
+        theAlert.addButton(withTitle: "Ok")
+        
+        theAlert.runModal()
+    }
+    
+    func ShowSimpleCriticalPanelWithString(_ wString:String)
+    {
+        let theAlert = NSAlert()
+        theAlert.alertStyle = .critical
+        theAlert.informativeText = wString
+        theAlert.addButton(withTitle: "Ok")
+        
+        theAlert.runModal()
     }
     
     // This routine returns the number of segments in the model, which is not easily retrieved from the PCH_FLD12_TxfoDetails
@@ -162,6 +226,9 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         guard let generalVC = controller.generalDataController else
         {
             DLog("Could not access General Data View")
+            
+            ShowSimpleCriticalPanelWithString("A serious error occurred (could not access General Data View).")
+            
             return
         }
         
@@ -170,27 +237,41 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         if (txfo.inputUnits == 1)
         {
             generalVC.mmInputButton.state = .on
+            generalVC.inchInputButton.state = .off
         }
         else if (txfo.inputUnits == 2)
         {
+            generalVC.mmInputButton.state = .off
             generalVC.inchInputButton.state = .on
         }
         else
         {
             DLog("An illegal input unit was encountered - ignoring!")
+            
+            ShowSimpleWarningPanelWithString("An illegal input unit was encountered - ignoring.")
+            
+            generalVC.mmInputButton.state = .off
+            generalVC.inchInputButton.state = .off
         }
         
         if txfo.numPhases == 1
         {
             generalVC.onePhaseButton.state = .on
+            generalVC.threePhaseButton.state = .off
         }
         else if txfo.numPhases == 3
         {
+            generalVC.onePhaseButton.state = .off
             generalVC.threePhaseButton.state = .on
         }
         else
         {
             DLog("We only build single- and three-phase transformers - ignoring!")
+            
+            ShowSimpleWarningPanelWithString("We only build single- and three-phase transformers - ignoring number of phases!")
+            
+            generalVC.onePhaseButton.state = .off
+            generalVC.threePhaseButton.state = .off
         }
         
         generalVC.frequencyField.stringValue = "\(txfo.frequency)"
@@ -204,9 +285,11 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         if (txfo.alcuShield == 0)
         {
             generalVC.alcuNoButton.state = .on
+            generalVC.alcuYesButton.state = .off
         }
         else
         {
+            generalVC.alcuNoButton.state = .off
             generalVC.alcuYesButton.state = .on
         }
         
@@ -219,19 +302,30 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         if (txfo.dispElon == 0)
         {
             generalVC.offsetElongNoneButton.state = .on
+            generalVC.offsetButton.state = .off
+            generalVC.elongButton.state = .off
         }
         else if (txfo.dispElon == 1)
         {
+            generalVC.offsetElongNoneButton.state = .off
             generalVC.offsetButton.state = .on
+            generalVC.elongButton.state = .off
         }
         else if (txfo.dispElon == 2)
         {
+            generalVC.offsetElongNoneButton.state = .off
+            generalVC.offsetButton.state = .off
             generalVC.elongButton.state = .on
         }
         else
         {
             DLog("Illegal value for offset/elongation - setting to none")
+            
+            ShowSimpleWarningPanelWithString("Illegal value for offset/elongation - setting to none")
+            
             generalVC.offsetElongNoneButton.state = .on
+            generalVC.offsetButton.state = .off
+            generalVC.elongButton.state = .off
         }
         
         if (generalVC.offsetElongNoneButton.state == .on)
@@ -253,12 +347,18 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         guard let terminalVC = controller.terminalDataController else
         {
             DLog("Could not access Terminals Data View")
+            
+            ShowSimpleCriticalPanelWithString("A serious error occurred (could not access Terminal Data View).")
+            
             return
         }
         
         guard txfo.numTerminals > 0 else
         {
             DLog("Illegal terminal count!")
+            
+            ShowSimpleCriticalPanelWithString("A serious error occurred (illegal terminal count of \(txfo.numTerminals) in file).")
+            
             return
         }
         
@@ -266,6 +366,9 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         guard let terminalArray = txfo.terminals as? [PCH_FLD12_Terminal] else
         {
             DLog("Problem with terminal array")
+            
+            ShowSimpleCriticalPanelWithString("A serious error occurred (could not read terminal array).")
+            
             return
         }
         
@@ -276,12 +379,18 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         guard let layerVC = controller.layerDataController else
         {
             DLog("Could not access Layers Data View")
+            
+            ShowSimpleCriticalPanelWithString("A serious error occurred (could not access Layer Data View).")
+            
             return
         }
         
         guard txfo.numLayers > 0 else
         {
             DLog("Illegal layer count!")
+            
+            ShowSimpleCriticalPanelWithString("A serious error occurred (illegal layer count of \(txfo.numLayers) in file).")
+            
             return
         }
         
@@ -290,6 +399,9 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         guard let layerArray = txfo.layers as? [PCH_FLD12_Layer] else
         {
             DLog("Problem with layer array")
+            
+            ShowSimpleCriticalPanelWithString("A serious error occurred (could not read layer array).")
+            
             return
         }
         
@@ -304,18 +416,32 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             {
                 segmentArray.append(contentsOf: layerSegments)
             }
+            else
+            {
+                DLog("Problem with segment array")
+                
+                ShowSimpleCriticalPanelWithString("A serious error occurred (could not read segment array for layer \(nextLayer.number).")
+                
+                return
+            }
         }
         
         // And finally, segments
         guard let segmentVC = controller.segmentDataController else
         {
             DLog("Could not access Segments Data View")
+            
+            ShowSimpleCriticalPanelWithString("A serious error occurred (could not access Segment Data View).")
+            
             return
         }
         
         guard segmentArray.count >= layerArray.count else
         {
             DLog("Illegal segment count!")
+            
+            ShowSimpleCriticalPanelWithString("A serious error occurred (illegal segment count of \(segmentArray.count) in file).")
+            
             return
         }
         
