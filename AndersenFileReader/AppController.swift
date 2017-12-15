@@ -19,8 +19,12 @@ class AppController: NSObject, NSOpenSavePanelDelegate
     var openPanel:NSOpenPanel? = nil
     var currentMainWindowViewController:InputFileViewController? = nil
     
+    var lastSavedTransformer:PCH_FLD12_TxfoDetails? = nil
     var currentTransformer:PCH_FLD12_TxfoDetails? = nil
     var currentFileName:String? = nil
+    
+    var currenTransformerIsDirty = false
+    var currentFileIsOutput = false
     
     @IBAction func handleSaveFLD12InputFile(_ sender: Any)
     {
@@ -37,9 +41,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             guard let fileURL = savePanel.url else
             {
                 DLog("URL not returned!")
-                
                 ShowSimpleCriticalPanelWithString("A serious error occurred (could not get file URL).")
-                
                 return
             }
             
@@ -53,6 +55,8 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 ShowSimpleCriticalPanelWithString("Could not create input file!")
                 return
             }
+            
+            self.lastSavedTransformer = self.currentTransformer
         }
     }
     
@@ -89,9 +93,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             guard let fileURL = openPanel.url else
             {
                 DLog("URL not returned!")
-                
                 ShowSimpleCriticalPanelWithString("A serious error occurred (could not get file URL).")
-                
                 self.openPanel = nil
                 return
             }
@@ -113,9 +115,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             guard let outputData = PCH_FLD12_OutputData(outputFile: outputFileAsString) else
             {
                 DLog("Bad file format")
-                
                 ShowSimpleCriticalPanelWithString("A serious error occurred (the choice is not a valid FLD12 output file).")
-                
                 self.openPanel = nil
                 return
             }
@@ -146,9 +146,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             guard let segmentsAsData = outputData.segmentData as? [Data] else
             {
                 DLog("Could not get segments as Data")
-                
                 ShowSimpleCriticalPanelWithString("A serious error occurred (could not read array as Data).")
-                
                 self.openPanel = nil
                 return
             }
@@ -167,9 +165,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 if numBytes != segmentDataStride
                 {
                     DLog("Stride: \(segmentDataStride); Bytes Transferred: \(numBytes)")
-                    
                     ShowSimpleCriticalPanelWithString("A serious error occurred (data size does not match required size).")
-                    
                     self.openPanel = nil
                     return
                 }
@@ -183,7 +179,10 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             outputDataController.handleUpdate(segmentData: segmentArray)
             
             self.currentFileName = fileURL.deletingPathExtension().lastPathComponent
+            
             self.currentTransformer = outputData.inputData
+            
+            self.currentFileIsOutput = true
         }
         
         self.openPanel = nil
@@ -211,9 +210,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             guard let fileURL = openPanel.url else
             {
                 DLog("URL not returned!")
-                
                 ShowSimpleCriticalPanelWithString("A serious error occurred (could not get file URL).")
-                
                 self.openPanel = nil
                 return
             }
@@ -221,9 +218,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             guard let txfo = PCH_FLD12_TxfoDetails(url: fileURL) else
             {
                 DLog("File is not in the required FLD12 format!")
-                
                 ShowSimpleCriticalPanelWithString("A serious error occurred (the choice is not a valid FLD12 input file).")
-                
                 self.openPanel = nil
                 return
             }
@@ -252,6 +247,9 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             
             self.currentFileName = fileURL.deletingPathExtension().lastPathComponent
             self.currentTransformer = txfo
+            self.lastSavedTransformer = txfo
+            
+            self.currentFileIsOutput = false
             
         } // end if openPanel
         
@@ -284,9 +282,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         guard let generalVC = controller.generalDataController else
         {
             DLog("Could not access General Data View")
-            
             ShowSimpleCriticalPanelWithString("A serious error occurred (could not access General Data View).")
-            
             return
         }
         
@@ -305,7 +301,6 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         else
         {
             DLog("An illegal input unit was encountered - ignoring!")
-            
             ShowSimpleWarningPanelWithString("An illegal input unit was encountered - ignoring.")
             
             generalVC.mmInputButton.state = .off
@@ -325,7 +320,6 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         else
         {
             DLog("We only build single- and three-phase transformers - ignoring!")
-            
             ShowSimpleWarningPanelWithString("We only build single- and three-phase transformers - ignoring number of phases!")
             
             generalVC.onePhaseButton.state = .off
@@ -378,7 +372,6 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         else
         {
             DLog("Illegal value for offset/elongation - setting to none")
-            
             ShowSimpleWarningPanelWithString("Illegal value for offset/elongation - setting to none")
             
             generalVC.offsetElongNoneButton.state = .on
@@ -405,18 +398,14 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         guard let terminalVC = controller.terminalDataController else
         {
             DLog("Could not access Terminals Data View")
-            
             ShowSimpleCriticalPanelWithString("A serious error occurred (could not access Terminal Data View).")
-            
             return
         }
         
         guard txfo.numTerminals > 0 else
         {
             DLog("Illegal terminal count!")
-            
             ShowSimpleCriticalPanelWithString("A serious error occurred (illegal terminal count of \(txfo.numTerminals) in file).")
-            
             return
         }
         
@@ -424,9 +413,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         guard let terminalArray = txfo.terminals as? [PCH_FLD12_Terminal] else
         {
             DLog("Problem with terminal array")
-            
             ShowSimpleCriticalPanelWithString("A serious error occurred (could not read terminal array).")
-            
             return
         }
         
@@ -437,18 +424,14 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         guard let layerVC = controller.layerDataController else
         {
             DLog("Could not access Layers Data View")
-            
             ShowSimpleCriticalPanelWithString("A serious error occurred (could not access Layer Data View).")
-            
             return
         }
         
         guard txfo.numLayers > 0 else
         {
             DLog("Illegal layer count!")
-            
             ShowSimpleCriticalPanelWithString("A serious error occurred (illegal layer count of \(txfo.numLayers) in file).")
-            
             return
         }
         
@@ -457,9 +440,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         guard let layerArray = txfo.layers as? [PCH_FLD12_Layer] else
         {
             DLog("Problem with layer array")
-            
             ShowSimpleCriticalPanelWithString("A serious error occurred (could not read layer array).")
-            
             return
         }
         
@@ -477,9 +458,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             else
             {
                 DLog("Problem with segment array")
-                
                 ShowSimpleCriticalPanelWithString("A serious error occurred (could not read segment array for layer \(nextLayer.number).")
-                
                 return
             }
         }
@@ -488,18 +467,14 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         guard let segmentVC = controller.segmentDataController else
         {
             DLog("Could not access Segments Data View")
-            
             ShowSimpleCriticalPanelWithString("A serious error occurred (could not access Segment Data View).")
-            
             return
         }
         
         guard segmentArray.count >= layerArray.count else
         {
             DLog("Illegal segment count!")
-            
             ShowSimpleCriticalPanelWithString("A serious error occurred (illegal segment count of \(segmentArray.count) in file).")
-            
             return
         }
         

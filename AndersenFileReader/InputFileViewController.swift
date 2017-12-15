@@ -38,12 +38,8 @@ class InputFileViewController: NSViewController {
         {
             if winView.subviews.count > 0
             {
-                DLog("Window already has subview! Removing...")
+                // DLog("Window already has subview! Removing...")
                 winView.subviews = []
-            }
-            else
-            {
-                DLog("Window has no subview!")
             }
             
             winView.addSubview(self.view)
