@@ -13,7 +13,13 @@ class AppController: NSObject, NSOpenSavePanelDelegate
     // A reference to the main window (so we don't need to make any cross-references to the app delegate)
     @IBOutlet weak var window: NSWindow!
     
+    // outlets for menu items whose enabling we want to control
     @IBOutlet weak var saveInputFileItem: NSMenuItem!
+    @IBOutlet weak var andersenSaveSegmentSCdataItem: NSMenuItem!
+    
+    @IBOutlet weak var andersenConvertToInchItem: NSMenuItem!
+    
+    @IBOutlet weak var andersenConvertToMetricItem: NSMenuItem!
     
     // Variable used to hold the current openPanel so the delegate routine can respond correctly
     var openPanel:NSOpenPanel? = nil
@@ -21,10 +27,79 @@ class AppController: NSObject, NSOpenSavePanelDelegate
     
     var lastSavedTransformer:PCH_FLD12_TxfoDetails? = nil
     var currentTransformer:PCH_FLD12_TxfoDetails? = nil
+    var currentSegmentData:[SegmentData]? = nil // only valid if currentFileIsOutput is true
     var currentFileName:String? = nil
     
     var currenTransformerIsDirty = false
     var currentFileIsOutput = false
+    
+    @IBAction func handleSaveSegmentData(_ sender: Any)
+    {
+        if !currentFileIsOutput
+        {
+            DLog("Current transformer file is not an Andersen OUTPUT file!")
+            return
+        }
+        
+        guard let layerArray = currentTransformer?.layers as? [PCH_FLD12_Layer] else
+        {
+            DLog("Could not get layer data from currently-loaded transformer file")
+            return
+        }
+        
+        guard let segmentData = self.currentSegmentData else
+        {
+            DLog("There is no segment data to save!")
+            return
+        }
+        
+        var segDataIndex = 0
+        var outputString:String = ""
+        
+        for nextLayer in layerArray
+        {
+            outputString.append("Layer \(nextLayer.number)\n")
+            outputString.append("Segment Number, Tension/Compression, Spacer Block Force, Combined Force\n")
+            
+            while segDataIndex < Int(nextLayer.lastSegment)
+            {
+                let nextSegment = segmentData[segDataIndex]
+                segDataIndex += 1
+                outputString.append("\(nextSegment.number), \(nextSegment.scMaxTensionCompression), \(nextSegment.scForceInSpacerBlocks), \(nextSegment.scCombinedForce)\n")
+            }
+            
+            outputString.append("\n\n")
+        }
+        
+        let savePanel = NSSavePanel()
+        
+        savePanel.message = "Save Segment Short-Circuit Force Ouput File"
+        savePanel.canCreateDirectories = true
+        savePanel.allowedFileTypes = ["public.text"]
+        
+        if savePanel.runModal() == .OK
+        {
+            guard let fileURL = savePanel.url else
+            {
+                DLog("URL not returned!")
+                ShowSimpleCriticalPanelWithString("A serious error occurred (could not get file URL).")
+                return
+            }
+            
+            do
+            {
+                try outputString.write(to: fileURL, atomically: false, encoding: .utf8)
+            }
+            catch
+            {
+                DLog("Could not create SC-force-output file!")
+                ShowSimpleCriticalPanelWithString("Could not create SC-force-output file!")
+                return
+            }
+        }
+        
+    }
+    
     
     @IBAction func handleSaveFLD12InputFile(_ sender: Any)
     {
@@ -66,6 +141,10 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         if menuItem == self.saveInputFileItem
         {
             return currentTransformer != nil
+        }
+        else if menuItem == self.andersenSaveSegmentSCdataItem
+        {
+            return self.currentFileIsOutput && self.currentSegmentData != nil && self.currentTransformer != nil
         }
         
         return true
@@ -177,6 +256,8 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             }
             
             outputDataController.handleUpdate(segmentData: segmentArray)
+            
+            self.currentSegmentData = segmentArray
             
             self.currentFileName = fileURL.deletingPathExtension().lastPathComponent
             

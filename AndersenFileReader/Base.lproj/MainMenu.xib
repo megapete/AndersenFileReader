@@ -19,6 +19,9 @@
         </customObject>
         <customObject id="eHZ-cW-bVH" customClass="AppController" customModule="AndersenFileReader" customModuleProvider="target">
             <connections>
+                <outlet property="andersenConvertToInchItem" destination="Qev-lg-5Xa" id="xiL-C8-7or"/>
+                <outlet property="andersenConvertToMetricItem" destination="ZOW-6W-1Tf" id="78m-70-17L"/>
+                <outlet property="andersenSaveSegmentSCdataItem" destination="Pn8-A2-OWj" id="jPL-RA-FEh"/>
                 <outlet property="saveInputFileItem" destination="6uq-Gq-Uje" id="w0W-lb-jU3"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="cIJ-Qt-dOf"/>
             </connections>
@@ -639,6 +642,9 @@
                             <menuItem isSeparatorItem="YES" id="OGd-ch-MzS"/>
                             <menuItem title="Save segment force data..." id="Pn8-A2-OWj">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="handleSaveSegmentData:" target="eHZ-cW-bVH" id="oQ9-ZJ-n9N"/>
+                                </connections>
                             </menuItem>
                         </items>
                     </menu>
@@ -719,7 +725,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="765" height="510"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <value key="minSize" type="size" width="722" height="510"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="765" height="510"/>
