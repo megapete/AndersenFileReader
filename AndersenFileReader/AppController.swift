@@ -83,14 +83,32 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         
         ShowDetailsForTxfo(txfo: txfo.inputData!, controller: outputVC)
         
-        let outputDataController = OutputDataController(nibName: nil, bundle: nil)
+        // For now, this routine is only used by the conversion routines, which implies that the tab view already exists, so we'll just use '!'. If it is ever used on a more general basis, then this will need to be made a bit fancier.
+        let tabView = outputVC.tabView!
         
-        let outputTabItem = NSTabViewItem(viewController: outputDataController)
-        outputTabItem.label = "Output"
+        // we only add an output view if it doesn't already exist (this should never happen, but this routine may be updated one day)
+        var outputDataController:OutputDataController? = nil
         
-        if let tabView = outputVC.tabView
+        if tabView.numberOfTabViewItems < 5
         {
+            let newOutputDataController = OutputDataController(nibName: nil, bundle: nil)
+            outputDataController = newOutputDataController
+            
+            let outputTabItem = NSTabViewItem(viewController: newOutputDataController)
+            outputTabItem.label = "Output"
+        
             tabView.addTabViewItem(outputTabItem)
+        }
+        else
+        {
+            let outputTabItem = tabView.tabViewItem(at: 4)
+            
+            outputDataController = outputTabItem.viewController as? OutputDataController
+            
+            if outputDataController == nil
+            {
+                DLog("Could not acces tab view item's view controller as an OutputDatatController")
+            }
         }
         
         guard let segmentsAsData = txfo.segmentData as? [Data] else
@@ -126,7 +144,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             segmentPtr.deallocate(capacity: 1)
         }
         
-        outputDataController.handleUpdate(segmentData: segmentArray)
+        outputDataController!.handleUpdate(segmentData: segmentArray)
         
         self.currentSegmentData = segmentArray
         
