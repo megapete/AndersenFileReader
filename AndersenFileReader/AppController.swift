@@ -16,9 +16,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
     // outlets for menu items whose enabling we want to control
     @IBOutlet weak var saveInputFileItem: NSMenuItem!
     @IBOutlet weak var andersenSaveSegmentSCdataItem: NSMenuItem!
-    
     @IBOutlet weak var andersenConvertToInchItem: NSMenuItem!
-    
     @IBOutlet weak var andersenConvertToMetricItem: NSMenuItem!
     
     // Variable used to hold the current openPanel so the delegate routine can respond correctly
@@ -32,6 +30,112 @@ class AppController: NSObject, NSOpenSavePanelDelegate
     
     var currenTransformerIsDirty = false
     var currentFileIsOutput = false
+    
+    @IBAction func handleConvertToMetric(_ sender: Any)
+    {
+        guard let currTxfo = self.currentTransformer else
+        {
+            DLog("No transformer in memory!")
+            return
+        }
+        
+        if currTxfo.inputUnits != 2 || !self.currentFileIsOutput
+        {
+            return
+        }
+        
+        let newTransformer = PCH_FLD12_Library.runFLD12withTxfo(currTxfo, outputType: .metric)
+        
+        UpdateViewsWithTransformer(txfo: newTransformer)
+    }
+    
+    
+    @IBAction func handleConvertToInch(_ sender: Any)
+    {
+        guard let currTxfo = self.currentTransformer else
+        {
+            DLog("No transformer in memory!")
+            return
+        }
+        
+        if currTxfo.inputUnits != 1 || !self.currentFileIsOutput
+        {
+            return
+        }
+        
+        let newTransformer = PCH_FLD12_Library.runFLD12withTxfo(currTxfo, outputType: .imperial)
+        
+        UpdateViewsWithTransformer(txfo: newTransformer)
+    }
+    
+    func UpdateViewsWithTransformer(txfo:PCH_FLD12_OutputData)
+    {
+        // we only need a new InputFileViewController if there isn't already one
+        var inputSubView = currentMainWindowViewController
+        
+        if inputSubView == nil
+        {
+            inputSubView = InputFileViewController(intoWindow: self.window)
+            currentMainWindowViewController = inputSubView
+        }
+        
+        let outputVC = inputSubView!
+        
+        ShowDetailsForTxfo(txfo: txfo.inputData!, controller: outputVC)
+        
+        let outputDataController = OutputDataController(nibName: nil, bundle: nil)
+        
+        let outputTabItem = NSTabViewItem(viewController: outputDataController)
+        outputTabItem.label = "Output"
+        
+        if let tabView = outputVC.tabView
+        {
+            tabView.addTabViewItem(outputTabItem)
+        }
+        
+        guard let segmentsAsData = txfo.segmentData as? [Data] else
+        {
+            DLog("Could not get segments as Data")
+            ShowSimpleCriticalPanelWithString("A serious error occurred (could not read array as Data).")
+            self.openPanel = nil
+            return
+        }
+        
+        // So this is the method I came up with to convert back the NSArray of SegmentData structs that I had to convert to NSData objects in the library (whew!). It's really ugly and I could probably do something a bit more efficient, but this seems to work.
+        var segmentArray:[SegmentData] = []
+        // we need to use stride because that is the memory "distance" between instances in an array (which is what we have in this case). The actual size of the struct is MemoryLayout<SegmentData>.size
+        let segmentDataStride = MemoryLayout<SegmentData>.stride
+        
+        for nextData in segmentsAsData
+        {
+            let segmentPtr = UnsafeMutablePointer<SegmentData>.allocate(capacity: 1)
+            let segmentBuffer = UnsafeMutableBufferPointer(start: segmentPtr, count: 1)
+            let numBytes = nextData.copyBytes(to: segmentBuffer)
+            
+            if numBytes != segmentDataStride
+            {
+                DLog("Stride: \(segmentDataStride); Bytes Transferred: \(numBytes)")
+                ShowSimpleCriticalPanelWithString("A serious error occurred (data size does not match required size).")
+                self.openPanel = nil
+                return
+            }
+            
+            segmentArray.append(segmentBuffer[0])
+            
+            // since we allocated the memory for the pointer, we are responsible to deallocate it as well
+            segmentPtr.deallocate(capacity: 1)
+        }
+        
+        outputDataController.handleUpdate(segmentData: segmentArray)
+        
+        self.currentSegmentData = segmentArray
+        
+        //self.currentFileName = fileURL.deletingPathExtension().lastPathComponent
+        
+        self.currentTransformer = txfo.inputData
+        
+        self.currentFileIsOutput = true
+    }
     
     @IBAction func handleSaveSegmentData(_ sender: Any)
     {
@@ -145,6 +249,34 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         else if menuItem == self.andersenSaveSegmentSCdataItem
         {
             return self.currentFileIsOutput && self.currentSegmentData != nil && self.currentTransformer != nil
+        }
+        else if menuItem == self.andersenConvertToInchItem
+        {
+            if !self.currentFileIsOutput
+            {
+                return false
+            }
+            
+            guard let currTxfo = self.currentTransformer else
+            {
+                return false
+            }
+            
+            return currTxfo.inputUnits == 1
+        }
+        else if menuItem == self.andersenConvertToMetricItem
+        {
+            if !self.currentFileIsOutput
+            {
+                return false
+            }
+            
+            guard let currTxfo = self.currentTransformer else
+            {
+                return false
+            }
+            
+            return currTxfo.inputUnits == 2
         }
         
         return true

@@ -635,9 +635,15 @@
                         <items>
                             <menuItem title="Convert output to inch..." id="Qev-lg-5Xa">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="handleConvertToInch:" target="eHZ-cW-bVH" id="c20-f9-R8R"/>
+                                </connections>
                             </menuItem>
                             <menuItem title="Convert output to metric..." id="ZOW-6W-1Tf">
                                 <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="handleConvertToMetric:" target="eHZ-cW-bVH" id="1yT-Ql-hsf"/>
+                                </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="OGd-ch-MzS"/>
                             <menuItem title="Save segment force data..." id="Pn8-A2-OWj">
@@ -725,7 +731,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="765" height="510"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
             <value key="minSize" type="size" width="722" height="510"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="765" height="510"/>
