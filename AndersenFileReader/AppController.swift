@@ -362,6 +362,38 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             
             ShowDetailsForTxfo(txfo: outputData.inputData!, controller: outputVC)
             
+            guard let tabView = outputVC.tabView else
+            {
+                DLog("No tab view available!")
+                return
+            }
+            
+            // we only add an output view if it doesn't already exist (this should never happen, but this routine may be updated one day)
+            var outputDataController:OutputDataController? = nil
+            
+            if tabView.numberOfTabViewItems < 5
+            {
+                let newOutputDataController = OutputDataController(nibName: nil, bundle: nil)
+                outputDataController = newOutputDataController
+                
+                let outputTabItem = NSTabViewItem(viewController: newOutputDataController)
+                outputTabItem.label = "Output"
+                
+                tabView.addTabViewItem(outputTabItem)
+            }
+            else
+            {
+                let outputTabItem = tabView.tabViewItem(at: 4)
+                
+                outputDataController = outputTabItem.viewController as? OutputDataController
+                
+                if outputDataController == nil
+                {
+                    DLog("Could not acces tab view item's view controller as an OutputDatatController")
+                }
+            }
+            
+            /*
             let outputDataController = OutputDataController(nibName: nil, bundle: nil)
             
             let outputTabItem = NSTabViewItem(viewController: outputDataController)
@@ -371,6 +403,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             {
                 tabView.addTabViewItem(outputTabItem)
             }
+            */
             
             guard let segmentsAsData = outputData.segmentData as? [Data] else
             {
@@ -405,7 +438,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 segmentPtr.deallocate(capacity: 1)
             }
             
-            outputDataController.handleUpdate(segmentData: segmentArray)
+            outputDataController!.handleUpdate(segmentData: segmentArray)
             
             self.currentSegmentData = segmentArray
             
