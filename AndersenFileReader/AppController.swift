@@ -446,6 +446,11 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             
             self.currentTransformer = outputData.inputData
             
+            if let fileName = self.currentFileName
+            {
+                self.window.title = fileName
+            }
+            
             self.currentFileIsOutput = true
         }
         
@@ -512,6 +517,11 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             self.currentFileName = fileURL.deletingPathExtension().lastPathComponent
             self.currentTransformer = txfo
             self.lastSavedTransformer = txfo
+            
+            if let fileName = self.currentFileName
+            {
+                self.window.title = fileName
+            }
             
             self.currentFileIsOutput = false
             
