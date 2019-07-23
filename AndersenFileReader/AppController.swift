@@ -141,7 +141,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
             segmentArray.append(segmentBuffer[0])
             
             // since we allocated the memory for the pointer, we are responsible to deallocate it as well
-            segmentPtr.deallocate(capacity: 1)
+            segmentPtr.deallocate()
         }
         
         outputDataController!.handleUpdate(segmentData: segmentArray)
@@ -258,7 +258,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
     }
     
     // take care of enabling menu items here
-    override func validateMenuItem(_ menuItem: NSMenuItem) -> Bool
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool
     {
         if menuItem == self.saveInputFileItem
         {
@@ -435,7 +435,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 segmentArray.append(segmentBuffer[0])
                 
                 // since we allocated the memory for the pointer, we are responsible to deallocate it as well
-                segmentPtr.deallocate(capacity: 1)
+                segmentPtr.deallocate()
             }
             
             outputDataController!.handleUpdate(segmentData: segmentArray)
