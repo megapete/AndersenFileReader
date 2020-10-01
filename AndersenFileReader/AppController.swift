@@ -46,7 +46,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         
         let newTransformer = PCH_FLD12_Library.runFLD12withTxfo(currTxfo, outputType: .metric)
         
-        UpdateViewsWithTransformer(txfo: newTransformer)
+        UpdateViewsWithTransformer(txfo: newTransformer!)
     }
     
     
@@ -65,7 +65,7 @@ class AppController: NSObject, NSOpenSavePanelDelegate
         
         let newTransformer = PCH_FLD12_Library.runFLD12withTxfo(currTxfo, outputType: .imperial)
         
-        UpdateViewsWithTransformer(txfo: newTransformer)
+        UpdateViewsWithTransformer(txfo: newTransformer!)
     }
     
     func UpdateViewsWithTransformer(txfo:PCH_FLD12_OutputData)
@@ -341,7 +341,10 @@ class AppController: NSObject, NSOpenSavePanelDelegate
                 return
             }
             
-            guard let outputData = PCH_FLD12_OutputData(outputFile: outputFileAsString) else
+            let dummyFlux = ""
+            let dummyFld8 = ""
+            
+            guard let outputData = PCH_FLD12_OutputData(outputFile: outputFileAsString, fluxLines: dummyFlux, fld8File: dummyFld8) else
             {
                 DLog("Bad file format")
                 ShowSimpleCriticalPanelWithString("A serious error occurred (the choice is not a valid FLD12 output file).")

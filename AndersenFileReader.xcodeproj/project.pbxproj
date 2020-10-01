@@ -30,9 +30,9 @@
 		D3AD7C3F1FD866F900E19465 /* SegmentDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AD7C3D1FD866F900E19465 /* SegmentDataController.swift */; };
 		D3AD7C401FD866F900E19465 /* SegmentDataController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3AD7C3E1FD866F900E19465 /* SegmentDataController.xib */; };
 		D3CE93C41FD88B440019E61F /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CE93C31FD88B440019E61F /* AppController.swift */; };
-		D3CE93C71FD898B40019E61F /* libPCH_FLD12_Library.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3CE93C61FD898B40019E61F /* libPCH_FLD12_Library.a */; };
 		D3CE93CC1FD8C14A0019E61F /* TerminalDataLineController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D3CE93CB1FD8C14A0019E61F /* TerminalDataLineController.xib */; };
 		D3DB56921FD9E16000D72619 /* TerminalDataLineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3DB56911FD9E16000D72619 /* TerminalDataLineController.swift */; };
+		F55EA24A2526225B00517284 /* libPCH_FLD12_Library.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F55EA2492526225B00517284 /* libPCH_FLD12_Library.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,10 +62,10 @@
 		D3AD7C3D1FD866F900E19465 /* SegmentDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentDataController.swift; sourceTree = "<group>"; };
 		D3AD7C3E1FD866F900E19465 /* SegmentDataController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SegmentDataController.xib; sourceTree = "<group>"; };
 		D3CE93C31FD88B440019E61F /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
-		D3CE93C61FD898B40019E61F /* libPCH_FLD12_Library.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPCH_FLD12_Library.a; path = ../PCH_FLD12_Library_Release/Products/usr/local/lib/libPCH_FLD12_Library.a; sourceTree = "<group>"; };
 		D3CE93C81FD899B10019E61F /* AndersenFileReader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AndersenFileReader-Bridging-Header.h"; sourceTree = "<group>"; };
 		D3CE93CB1FD8C14A0019E61F /* TerminalDataLineController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TerminalDataLineController.xib; sourceTree = "<group>"; };
 		D3DB56911FD9E16000D72619 /* TerminalDataLineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalDataLineController.swift; sourceTree = "<group>"; };
+		F55EA2492526225B00517284 /* libPCH_FLD12_Library.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPCH_FLD12_Library.a; path = ../../../Documents/MyProjects/PCH_FLD12_Library_Release/Products/usr/local/lib/libPCH_FLD12_Library.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3CE93C71FD898B40019E61F /* libPCH_FLD12_Library.a in Frameworks */,
+				F55EA24A2526225B00517284 /* libPCH_FLD12_Library.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +135,7 @@
 		D3CE93C51FD898B40019E61F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				D3CE93C61FD898B40019E61F /* libPCH_FLD12_Library.a */,
+				F55EA2492526225B00517284 /* libPCH_FLD12_Library.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -167,7 +167,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Peter Huber";
 				TargetAttributes = {
 					D3AD7C171FD833A600E19465 = {
@@ -266,6 +266,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -273,8 +274,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -300,9 +303,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = /Users/peterhub/Documents/MyProjects/PCH_FLD12_Library_Release/Products/usr/local/include;
-				LIBRARY_SEARCH_PATHS = /Users/peterhub/Documents/MyProjects/PCH_FLD12_Library_Release/Products/usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				HEADER_SEARCH_PATHS = /Users/peterhuber/Documents/MyProjects/PCH_FLD12_Library_Release/Products/usr/local/include;
+				LIBRARY_SEARCH_PATHS = /Users/peterhuber/Documents/MyProjects/PCH_FLD12_Library_Release/Products/usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -325,6 +328,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -332,8 +336,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -353,9 +359,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = /Users/peterhub/Documents/MyProjects/PCH_FLD12_Library_Release/Products/usr/local/include;
-				LIBRARY_SEARCH_PATHS = /Users/peterhub/Documents/MyProjects/PCH_FLD12_Library_Release/Products/usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				HEADER_SEARCH_PATHS = /Users/peterhuber/Documents/MyProjects/PCH_FLD12_Library_Release/Products/usr/local/include;
+				LIBRARY_SEARCH_PATHS = /Users/peterhuber/Documents/MyProjects/PCH_FLD12_Library_Release/Products/usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -368,10 +374,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AndersenFileReader/AndersenFileReader.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = /Users/peterhuber/Documents/MyProjects/PCH_FLD12_Library_Release/Products/usr/local/include;
 				INFOPLIST_FILE = AndersenFileReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = /Users/peterhuber/Documents/MyProjects/PCH_FLD12_Library_Release/Products/usr/local/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.huberis-tech.AndersenFileReader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AndersenFileReader/AndersenFileReader-Bridging-Header.h";
@@ -386,10 +395,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = AndersenFileReader/AndersenFileReader.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = /Users/peterhuber/Documents/MyProjects/PCH_FLD12_Library_Release/Products/usr/local/include;
 				INFOPLIST_FILE = AndersenFileReader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = /Users/peterhuber/Documents/MyProjects/PCH_FLD12_Library_Release/Products/usr/local/lib;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.huberis-tech.AndersenFileReader";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "AndersenFileReader/AndersenFileReader-Bridging-Header.h";
